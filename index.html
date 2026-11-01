@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102a32">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./app-icon.svg">
   <meta name="description" content="Remarkable trips for curious people. Find your next adventure with Incredible Travels.">
   <title>Incredible Travels | Go feel something</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,10 +54,11 @@ footer .footer-bottom nav a{font-size:12px}
 
     .brand-tagline{font:600 14px/1.35 var(--sans);letter-spacing:0;color:var(--muted);white-space:nowrap;max-width:none;margin-left:10px}
     @media(max-width:620px){.brand-tagline{font-size:11px;line-height:1.25;white-space:normal;max-width:180px;margin-left:6px}.brand-tagline .tagline-last{white-space:nowrap;display:inline-block}}
+    .install-app{flex:0 0 auto;margin-left:10px;padding:9px 12px;border:1px solid var(--teal);border-radius:5px;background:transparent;color:var(--teal);font:700 10px var(--sans);white-space:nowrap;cursor:pointer}.install-app:hover{background:var(--teal);color:white}@media(max-width:620px){.install-app{margin-left:6px;padding:7px 8px;font-size:9px}.brand{gap:6px;font-size:12px}.brand-icon{width:29px;height:29px;font-size:16px}}
 </style>
 </head>
 <body>
-  <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
+  <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><button class="install-app" id="install-app" type="button">Install App</button><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
     <div class="hero"><div class="wrap"><div class="hero-card"><div class="hero-copy"><div class="eyebrow">Big-hearted trips for curious people</div><h1>Go feel<br><em>something.</em></h1><p>Take the long lunch. Miss the turn. Find the little café you’ll tell everyone about. This is travel made for being there.</p><div class="hero-actions"><a class="btn coral" href="#journeys">Explore the world ↗</a><a class="play-link" href="#story"><span class="play">▶</span> Get to know us</a></div></div></div></div></div>
@@ -86,6 +89,8 @@ footer .footer-bottom nav a{font-size:12px}
     // event.preventDefault();const country=document.getElementById('destination').value,style=document.getElementById('style').value,duration=document.getElementById('duration').value;let count=0;document.querySelectorAll('.trip').forEach(card=>{const days=Number(card.dataset.days),match=(!country||card.dataset.country===country)&&(!style||card.dataset.style.split(' ').includes(style))&&(!duration||(duration==='short'&&days<=9)||(duration==='long'&&days>=10));card.hidden=!match;if(match)count++});document.getElementById('results').textContent=count?`${count} ${count===1?'journey':'journeys'} match your search.`:'No trips match those choices yet. Try another combination.';document.getElementById('journeys').scrollIntoView({behavior:'smooth'})});
     document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});\n    document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
     const menu=document.querySelector('.menu'),links=document.querySelector('.links');menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}));
+
+    let deferredInstallPrompt=null;const installButton=document.getElementById('install-app');window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event});installButton.addEventListener('click',async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null}else{alert('To install Incredible Travels, open your browser menu and choose “Install app” or “Add to Home Screen”.')}});window.addEventListener('appinstalled',()=>{installButton.textContent='App Installed';installButton.disabled=true});if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
   </script>
 </body>
 </html>
