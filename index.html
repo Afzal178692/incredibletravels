@@ -90,7 +90,57 @@ footer .footer-bottom nav a{font-size:12px}
     document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});\n    document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
     const menu=document.querySelector('.menu'),links=document.querySelector('.links');if(menu&&links){menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}));}
 
-    let deferredInstallPrompt=null;const installButton=document.getElementById('install-app');window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='Install App'});installButton.addEventListener('click',async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;if(choice&&choice.outcome==='accepted'){installButton.textContent='Installing…'}deferredInstallPrompt=null}else{const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);const isFirefox=/firefox/i.test(navigator.userAgent);const instructions=isIOS?'To install: tap the Share button in Safari, then choose “Add to Home Screen”.':isFirefox?'To add this website: open the browser menu and choose “Install” or “Add to Home Screen” if available.':'To install: open the browser menu (⋮) and choose “Install app” or “Add to Home screen”. If that option is not shown, refresh the page and try again in Chrome.';let note=document.getElementById('install-help');if(!note){note=document.createElement('div');note.id='install-help';note.setAttribute('role','status');note.style.cssText='position:fixed;z-index:9999;top:82px;left:50%;transform:translateX(-50%);width:min(92vw,420px);padding:14px 16px;background:#102a32;color:#fff;border-radius:8px;box-shadow:0 8px 28px #0003;font:13px/1.6 Arial,sans-serif;text-align:center';document.body.appendChild(note)}note.textContent=instructions+' Tap here to dismiss.';note.onclick=()=>note.remove();}});window.addEventListener('appinstalled',()=>{installButton.textContent='App Installed';installButton.disabled=true});if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+    // Reliable install control: show a visible response even when Chrome has no native prompt.
+    (() => {
+      const installButton = document.getElementById('install-app');
+      if (!installButton) return;
+      let deferredInstallPrompt = null;
+      const showInstallHelp = (message) => {
+        let panel = document.getElementById('install-help');
+        if (!panel) {
+          panel = document.createElement('div');
+          panel.id = 'install-help';
+          panel.setAttribute('role', 'status');
+          panel.setAttribute('aria-live', 'polite');
+          panel.style.cssText = 'position:fixed;z-index:99999;top:90px;left:50%;transform:translateX(-50%);width:min(92vw,440px);padding:16px 18px;background:#102a32;color:#fff;border:1px solid #f3c876;border-radius:8px;box-shadow:0 8px 28px #0004;font:14px/1.6 Arial,sans-serif;text-align:left;cursor:pointer';
+          document.body.appendChild(panel);
+        }
+        panel.textContent = message + '  (Tap this message to close.)';
+        panel.onclick = () => panel.remove();
+      };
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        installButton.textContent = 'Install App';
+      });
+      installButton.addEventListener('click', async () => {
+        installButton.disabled = true;
+        try {
+          if (deferredInstallPrompt) {
+            deferredInstallPrompt.prompt();
+            const choice = await deferredInstallPrompt.userChoice;
+            showInstallHelp(choice && choice.outcome === 'accepted'
+              ? 'Installation started. Follow the browser prompt to finish.'
+              : 'Installation was not completed. You can try again from the Chrome menu.');
+            deferredInstallPrompt = null;
+          } else {
+            showInstallHelp('Chrome has not offered the automatic install prompt yet. Open the Chrome menu (⋮) and look for “Install page as app” or “Install app”. If it is missing, reload this page once and check that you are using the latest Chrome.');
+          }
+        } catch (error) {
+          showInstallHelp('The install prompt is unavailable in this browser session. Open the Chrome menu (⋮) and look for “Install app” or “Add to Home screen”.');
+        } finally {
+          installButton.disabled = false;
+        }
+      });
+      window.addEventListener('appinstalled', () => {
+        installButton.textContent = 'App Installed';
+        installButton.disabled = true;
+        showInstallHelp('Incredible Travels has been installed.');
+      });
+    })();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
   </script>
 </body>
 </html>
