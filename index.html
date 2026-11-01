@@ -62,6 +62,8 @@ body{background:transparent;position:relative;isolation:isolate}
 #travel-video-bg{position:fixed;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%);z-index:0;pointer-events:none;border:0;background:#102a32;opacity:.82}
     body>header,body>nav,body>main,body>footer{position:relative;z-index:1}
     @media(max-width:768px){#travel-video-bg{width:177.78vh;height:100vh;min-width:177.78vh;min-height:100vh;opacity:.72}}
+    #mobile-video-play{display:none}
+    @media(max-width:768px){#mobile-video-play{display:block;position:fixed;z-index:5;right:14px;bottom:16px;border:1px solid rgba(255,255,255,.75);border-radius:999px;padding:12px 16px;background:rgba(16,42,50,.88);color:#fff;font:600 14px system-ui;box-shadow:0 3px 14px rgba(0,0,0,.25)}#mobile-video-play:active{transform:scale(.97)}}
 body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(135deg,rgba(8,25,32,.24),rgba(8,25,32,.12) 48%,rgba(8,25,32,.22))}
 .header,.jumpbar{background:rgba(255,255,255,.72)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .story,.domestic,.membership-section,.request-section,.newsletter{background:transparent!important}
@@ -84,6 +86,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </head>
 <body>
 <iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1&enablejsapi=1" title="Travel background video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true"></iframe>
+<button id="mobile-video-play" type="button" aria-label="Play background video">▶ Tap to play video</button>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
@@ -113,6 +116,18 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   <footer><div class="wrap"><div class="footer-top"><div class="footer-about"><a class="brand" href="#home" style="color:#fff"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS</a><p>Big-hearted journeys for curious people. Made personal, one good trip at a time.</p></div><div class="footer-cols"><div><h4>Explore</h4><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a></div><div><h4>Need a hand?</h4><a href="#contact">Talk to a trip designer</a><a href="#contact">Travel notes</a></div><div><h4>Say hello</h4><a href="mailto:afzal_girach@rediffmail.com">afzal_girach@rediffmail.com</a><a href="tel:+918495086389">8495086389</a></div></div></div><div class="footer-bottom"><span>© 2026 Incredible Travels. All journeys welcome.</span><nav><a href="#contact">Privacy</a><a href="#contact">Terms</a><a href="#home">Back to top ↑</a></nav></div></div></footer>
   <script>
     // The selected travel video is embedded with YouTube's official player.
+    const mobileVideoPlay=document.getElementById('mobile-video-play');
+    if(mobileVideoPlay){
+      mobileVideoPlay.addEventListener('click',()=>{
+        const player=document.getElementById('travel-video-bg');
+        if(player&&player.contentWindow){
+          player.contentWindow.postMessage(JSON.stringify({event:'command',func:'mute',args:[]}),'*');
+          player.contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'*');
+          mobileVideoPlay.textContent='▶ Starting video…';
+          window.setTimeout(()=>{mobileVideoPlay.textContent='▶ Tap to play video'},2500);
+        }
+      });
+    }
     // event.preventDefault();const country=document.getElementById('destination').value,style=document.getElementById('style').value,duration=document.getElementById('duration').value;let count=0;document.querySelectorAll('.trip').forEach(card=>{const days=Number(card.dataset.days),match=(!country||card.dataset.country===country)&&(!style||card.dataset.style.split(' ').includes(style))&&(!duration||(duration==='short'&&days<=9)||(duration==='long'&&days>=10));card.hidden=!match;if(match)count++});document.getElementById('results').textContent=count?`${count} ${count===1?'journey':'journeys'} match your search.`:'No trips match those choices yet. Try another combination.';document.getElementById('journeys').scrollIntoView({behavior:'smooth'})});
     document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});
     document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
