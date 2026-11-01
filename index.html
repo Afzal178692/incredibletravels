@@ -59,7 +59,9 @@ footer .footer-bottom nav a{font-size:12px}
 /* Full-page cinematic travel-video background */
 html{background:#102a32}
 body{background:transparent;position:relative;isolation:isolate}
-#travel-video-bg{position:fixed;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;border:0;background:#102a32;opacity:.82}
+#travel-video-bg{position:fixed;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%);z-index:0;pointer-events:none;border:0;background:#102a32;opacity:.82}
+    body>header,body>nav,body>main,body>footer{position:relative;z-index:1}
+    @media(max-width:768px){#travel-video-bg{width:177.78vh;height:100vh;min-width:177.78vh;min-height:100vh;opacity:.72}}
 body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(135deg,rgba(8,25,32,.24),rgba(8,25,32,.12) 48%,rgba(8,25,32,.22))}
 .header,.jumpbar{background:rgba(255,255,255,.72)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .story,.domestic,.membership-section,.request-section,.newsletter{background:transparent!important}
@@ -81,7 +83,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   </style>
 </head>
 <body>
-<iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1" title="Travel background video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true"></iframe>
+<iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1&enablejsapi=1" title="Travel background video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true"></iframe>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
