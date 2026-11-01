@@ -1,4 +1,4 @@
-name: Build and publish Android APK
+name: Build and publish signed Android APK
 
 on:
   push:
@@ -29,20 +29,45 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Build installable debug APK
-        working-directory: android
-        run: gradle assembleDebug
+      - name: Prepare signing key
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "::error::Missing repository secret ANDROID_KEYSTORE_BASE64. Add the Android signing secrets in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/release-key.jks
+          test -s android/release-key.jks
 
-      - name: Publish APK to GitHub Releases
+      - name: Build signed release APK
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android/release-key.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_PASSWORD" ] || [ -z "$ANDROID_KEY_ALIAS" ] || [ -z "$ANDROID_KEY_PASSWORD" ]; then
+            echo "::error::One or more Android signing secrets are missing."
+            exit 1
+          fi
+          gradle assembleRelease
+
+      - name: Publish signed APK to GitHub Releases
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-apk
           name: Incredible Travels Android App
           body: |
-            Installable Android package for Incredible Travels.
-            This is a directly distributed debug-signed APK. Android may ask you to allow installation from your browser.
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+            Signed release APK for Incredible Travels.
+            Distributed directly from the Incredible Travels GitHub repository.
+          files: android/app/build/outputs/apk/release/app-release.apk
           overwrite_files: true
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove signing key from runner
+        if: always()
+        run: rm -f android/release-key.jks
