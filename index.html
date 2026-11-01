@@ -124,44 +124,42 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   
-    // Cycle through distinct, directly hosted destination clips. Skip a clip automatically if it fails to load.
+    // Cycle through verified Pexels MP4 files. A failed clip is skipped instead of restarting the first.
     (function(){
       const player=document.getElementById('travel-background-player');
       if(!player || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const videos=[
-        'https://videos.pexels.com/video-files/11434040/11434040-hd_1920_1080_60fps.mp4',
-        'https://videos.pexels.com/video-files/31925509/31925509-hd_1920_1080_30fps.mp4',
-        'https://videos.pexels.com/video-files/33660350/33660350-hd_1920_1080_24fps.mp4'
+        'https://videos.pexels.com/video-files/20741731/20741731-hd_1920_1080_60fps.mp4',
+        'https://videos.pexels.com/video-files/20186335/20186335-hd_1920_1080_60fps.mp4',
+        'https://videos.pexels.com/video-files/6602523/6602523-hd_1920_1080_30fps.mp4',
+        'https://videos.pexels.com/video-files/33134530/14122748_3840_2160_24fps.mp4'
       ];
-      let current=0, timer=null, loading=false;
-      function next(){
+      let current=0, timer=null, attempt=0;
+      player.loop=false;
+      function advance(){
         if(timer) window.clearTimeout(timer);
         timer=null;
         current=(current+1)%videos.length;
-        loadCurrent();
+        load();
       }
-      function loadCurrent(){
-        if(loading) return;
-        loading=true;
+      function load(){
+        const thisAttempt=++attempt;
+        if(timer) window.clearTimeout(timer);
         player.onloadeddata=function(){
-          loading=false;
-          const attempt=player.play();
-          if(attempt && typeof attempt.catch==='function'){
-            attempt.catch(function(){ if(timer) window.clearTimeout(timer); timer=window.setTimeout(next,1200); });
-          }
-          if(timer) window.clearTimeout(timer);
-          timer=window.setTimeout(next,22000);
+          if(thisAttempt!==attempt) return;
+          const result=player.play();
+          if(result && typeof result.catch==='function') result.catch(function(){});
+          timer=window.setTimeout(advance,20000);
         };
         player.onerror=function(){
-          loading=false;
-          if(timer) window.clearTimeout(timer);
-          timer=window.setTimeout(next,300);
+          if(thisAttempt!==attempt) return;
+          timer=window.setTimeout(advance,500);
         };
+        player.onended=advance;
         player.src=videos[current];
         player.load();
       }
-      player.onended=next;
-      loadCurrent();
+      load();
     })();
 
   </script>
