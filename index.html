@@ -59,8 +59,8 @@ footer .footer-bottom nav a{font-size:12px}
 /* Full-page cinematic travel-video background */
 html{background:#102a32}
 body{background:transparent;position:relative;isolation:isolate}
-#travel-video-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;pointer-events:none;background:#102a32}
-body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(135deg,rgba(8,25,32,.42),rgba(8,25,32,.24) 48%,rgba(8,25,32,.38))}
+#travel-video-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;pointer-events:none;background:#102a32;opacity:.82}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(135deg,rgba(8,25,32,.24),rgba(8,25,32,.12) 48%,rgba(8,25,32,.22))}
 .header,.jumpbar{background:rgba(255,255,255,.72)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .story,.domestic,.membership-section,.request-section,.newsletter{background:transparent!important}
 .finder,.trip,.domestic-card,.membership-plan,.request-box,.newsletter-box,.photo-label{background:rgba(255,255,255,.70)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.72);box-shadow:0 12px 36px rgba(36,54,84,.08)}
@@ -82,7 +82,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted playsinline preload="auto" aria-hidden="true">
-  <source src="https://cdn.pixabay.com/video/2025/04/03/269635_large.mp4" type="video/mp4">
+  <source src="https://videos.pexels.com/video-files/35630900/15100295_3840_2160_30fps.mp4" type="video/mp4">
 </video>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
@@ -117,7 +117,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     if(travelVideo){
       const travelClips=[
         'https://cdn.pixabay.com/video/2025/04/03/269635_large.mp4',
-        'https://cdn.pixabay.com/video/2020/09/28/51046-462807911_large.mp4'
+        'https://videos.pexels.com/video-files/34692375/14704525_2160_3840_24fps.mp4'
       ];
       let travelClipIndex=0;
       travelVideo.addEventListener('ended',()=>{
