@@ -74,10 +74,8 @@ footer{background:rgba(13,36,45,.96)!important}
 body{background:transparent!important;isolation:isolate}
 body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,155,.20),transparent 38%),radial-gradient(ellipse at 92% 18%,rgba(112,190,255,.21),transparent 40%),radial-gradient(ellipse at 15% 58%,rgba(255,205,105,.18),transparent 42%),radial-gradient(ellipse at 88% 78%,rgba(125,220,180,.20),transparent 42%),linear-gradient(135deg,rgba(255,249,251,.57),rgba(244,247,255,.48) 48%,rgba(247,255,249,.55))}
 #travel-video-backdrop{position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;overflow:hidden;background:#152d35}
-#travel-video-backdrop iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;opacity:.72;filter:saturate(1.08)}
-@media(max-width:700px){#travel-video-backdrop iframe{opacity:.62}}
-#mobile-video-play{display:none}
-@media(max-width:700px){#mobile-video-play{display:block;position:fixed;right:14px;bottom:14px;z-index:10000;border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:11px 16px;background:rgba(20,38,48,.88);color:#fff;font:600 13px system-ui;box-shadow:0 4px 18px rgba(0,0,0,.22);cursor:pointer}}
+#travel-video-backdrop video{position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;object-fit:cover;opacity:.72;filter:saturate(1.08)}
+@media(max-width:700px){#travel-video-backdrop video{opacity:.62}}
 @media(prefers-reduced-motion:reduce){#travel-video-backdrop{display:none}}
 
 
@@ -87,9 +85,10 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
 <body>
 
   <div id="travel-video-backdrop" aria-hidden="true">
-    <iframe id="travel-background-player" title="Incredible Travels scenic video background" src="https://www.youtube-nocookie.com/embed/lP9v7LAbr8I?autoplay=1&mute=1&controls=0&loop=1&playlist=lP9v7LAbr8I&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <video id="travel-background-player" autoplay muted loop playsinline preload="metadata">
+      <source src="https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
   </div>
-  <button id="mobile-video-play" type="button" aria-label="Play travel background video">▶ Play travel video</button>
 
   <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
@@ -127,29 +126,24 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   
-    // Rotate muted scenic videos continuously for the full-page travel backdrop.
+    // Rotate ad-free, directly hosted destination footage in the full-page background.
     (function(){
       const player=document.getElementById('travel-background-player');
-      const videos=[
-        'lP9v7LAbr8I', // paradise landscapes around the world
-        'iK72qG-PZRc'  // natural and man-made wonders
-      ];
       if(!player) return;
-      const playButton=document.getElementById('mobile-video-play');
-      if(playButton){
-        playButton.addEventListener('click',()=>{
-          const id=videos[0];
-          player.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+id+'&playsinline=1&rel=0&modestbranding=1';
-          playButton.textContent='↻ Restart travel video';
-        });
-      }
+      const videos=[
+        'https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4',
+        'https://videos.pexels.com/video-files/15851151/15851151_3840_2160_60fps.mp4',
+        'https://videos.pexels.com/video-files/14301903/14301903_3840_2160_24fps.mp4'
+      ];
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       let current=0;
       window.setInterval(()=>{
         current=(current+1)%videos.length;
-        const id=videos[current];
-        player.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+id+'&playsinline=1&rel=0&modestbranding=1';
-      },90000);
+        player.src=videos[current];
+        player.load();
+        const play=player.play();
+        if(play && typeof play.catch==='function') play.catch(()=>{});
+      },20000);
     })();
 
   </script>
