@@ -73,22 +73,13 @@ footer{background:rgba(13,36,45,.96)!important}
 /* Continuous cinematic travel-video backdrop */
 body{background:transparent!important;isolation:isolate}
 body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,155,.20),transparent 38%),radial-gradient(ellipse at 92% 18%,rgba(112,190,255,.21),transparent 40%),radial-gradient(ellipse at 15% 58%,rgba(255,205,105,.18),transparent 42%),radial-gradient(ellipse at 88% 78%,rgba(125,220,180,.20),transparent 42%),linear-gradient(135deg,rgba(255,249,251,.57),rgba(244,247,255,.48) 48%,rgba(247,255,249,.55))}
-#travel-video-backdrop{position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;overflow:hidden;background:#152d35}
-#travel-video-backdrop video{position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;object-fit:cover;opacity:.72;filter:saturate(1.08)}
-@media(max-width:700px){#travel-video-backdrop video{opacity:.62}}
-@media(prefers-reduced-motion:reduce){#travel-video-backdrop{display:none}}
 
 
     .story-copy>.kicker{font-weight:800}
   </style>
 </head>
 <body>
-
-  <div id="travel-video-backdrop" aria-hidden="true">
-    <video id="travel-background-player" autoplay muted playsinline preload="auto"></video>
-  </div>
-
-  <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
+<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
     <div class="hero"><div class="wrap"><div class="hero-card"><div class="hero-copy"><div class="eyebrow">Big-hearted trips for curious people</div><h1>Go feel<br><em>something.</em></h1><p>Take the long lunch. Miss the turn. Find the little café you’ll tell everyone about. This is travel made for being there.</p><div class="hero-actions"><a class="btn coral" href="#journeys">Explore the world ↗</a><a class="play-link" href="#story"><span class="play">▶</span> Get to know us</a></div></div></div></div></div>
@@ -124,19 +115,7 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   
-    // Keep the previously working scenic clip visible while additional clips are tested.
-    (function(){
-      const player=document.getElementById('travel-background-player');
-      if(!player || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      player.loop=true;
-      player.muted=true;
-      player.autoplay=true;
-      player.playsInline=true;
-      player.src='https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4';
-      player.load();
-      const play=player.play();
-      if(play && typeof play.catch==='function') play.catch(function(){});
-    })();
+    
 
   </script>
 </body>
