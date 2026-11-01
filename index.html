@@ -85,9 +85,7 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
 <body>
 
   <div id="travel-video-backdrop" aria-hidden="true">
-    <video id="travel-background-player" autoplay muted loop playsinline preload="metadata">
-      <source src="https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4" type="video/mp4">
-    </video>
+    <video id="travel-background-player" autoplay muted playsinline preload="auto"></video>
   </div>
 
   <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
@@ -126,25 +124,44 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   
-    // Rotate ad-free, directly hosted destination footage in the full-page background.
+    // Cycle through distinct, directly hosted destination clips. Skip a clip automatically if it fails to load.
     (function(){
       const player=document.getElementById('travel-background-player');
-      if(!player) return;
+      if(!player || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const videos=[
-        'https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4',
-        'https://videos.pexels.com/video-files/29757452/29757452-hd_1920_1080_30fps.mp4',
-        'https://videos.pexels.com/video-files/19757074/19757074-hd_1920_1080_30fps.mp4',
-        'https://videos.pexels.com/video-files/8148205/8148205-hd_1920_1080_30fps.mp4'
+        'https://videos.pexels.com/video-files/11434040/11434040-hd_1920_1080_60fps.mp4',
+        'https://videos.pexels.com/video-files/31925509/31925509-hd_1920_1080_30fps.mp4',
+        'https://videos.pexels.com/video-files/33660350/33660350-hd_1920_1080_24fps.mp4'
       ];
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      let current=0;
-      window.setInterval(()=>{
+      let current=0, timer=null, loading=false;
+      function next(){
+        if(timer) window.clearTimeout(timer);
+        timer=null;
         current=(current+1)%videos.length;
+        loadCurrent();
+      }
+      function loadCurrent(){
+        if(loading) return;
+        loading=true;
+        player.onloadeddata=function(){
+          loading=false;
+          const attempt=player.play();
+          if(attempt && typeof attempt.catch==='function'){
+            attempt.catch(function(){ if(timer) window.clearTimeout(timer); timer=window.setTimeout(next,1200); });
+          }
+          if(timer) window.clearTimeout(timer);
+          timer=window.setTimeout(next,22000);
+        };
+        player.onerror=function(){
+          loading=false;
+          if(timer) window.clearTimeout(timer);
+          timer=window.setTimeout(next,300);
+        };
         player.src=videos[current];
         player.load();
-        const play=player.play();
-        if(play && typeof play.catch==='function') play.catch(()=>{});
-      },20000);
+      }
+      player.onended=next;
+      loadCurrent();
     })();
 
   </script>
