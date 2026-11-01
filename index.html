@@ -124,42 +124,18 @@ body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
     }
   
-    // Cycle through verified Pexels MP4 files. A failed clip is skipped instead of restarting the first.
+    // Keep the previously working scenic clip visible while additional clips are tested.
     (function(){
       const player=document.getElementById('travel-background-player');
       if(!player || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const videos=[
-        'https://videos.pexels.com/video-files/20741731/20741731-hd_1920_1080_60fps.mp4',
-        'https://videos.pexels.com/video-files/20186335/20186335-hd_1920_1080_60fps.mp4',
-        'https://videos.pexels.com/video-files/6602523/6602523-hd_1920_1080_30fps.mp4',
-        'https://videos.pexels.com/video-files/33134530/14122748_3840_2160_24fps.mp4'
-      ];
-      let current=0, timer=null, attempt=0;
-      player.loop=false;
-      function advance(){
-        if(timer) window.clearTimeout(timer);
-        timer=null;
-        current=(current+1)%videos.length;
-        load();
-      }
-      function load(){
-        const thisAttempt=++attempt;
-        if(timer) window.clearTimeout(timer);
-        player.onloadeddata=function(){
-          if(thisAttempt!==attempt) return;
-          const result=player.play();
-          if(result && typeof result.catch==='function') result.catch(function(){});
-          timer=window.setTimeout(advance,20000);
-        };
-        player.onerror=function(){
-          if(thisAttempt!==attempt) return;
-          timer=window.setTimeout(advance,500);
-        };
-        player.onended=advance;
-        player.src=videos[current];
-        player.load();
-      }
-      load();
+      player.loop=true;
+      player.muted=true;
+      player.autoplay=true;
+      player.playsInline=true;
+      player.src='https://videos.pexels.com/video-files/7499056/7499056-hd_1920_1080_30fps.mp4';
+      player.load();
+      const play=player.play();
+      if(play && typeof play.catch==='function') play.catch(function(){});
     })();
 
   </script>
