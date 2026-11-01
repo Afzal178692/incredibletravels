@@ -70,9 +70,10 @@ footer{background:rgba(13,36,45,.96)!important}
 @media(prefers-reduced-transparency:reduce){.header,.jumpbar,.finder,.trip,.domestic-card,.membership-plan,.request-box,.newsletter-box{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff!important}}
 
   
-/* Continuous cinematic travel-video backdrop */
-body{background:transparent!important;isolation:isolate}
-body:before{z-index:-1;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,155,.20),transparent 38%),radial-gradient(ellipse at 92% 18%,rgba(112,190,255,.21),transparent 40%),radial-gradient(ellipse at 15% 58%,rgba(255,205,105,.18),transparent 42%),radial-gradient(ellipse at 88% 78%,rgba(125,220,180,.20),transparent 42%),linear-gradient(135deg,rgba(255,249,251,.57),rgba(244,247,255,.48) 48%,rgba(247,255,249,.55))}
+/* Original translucent colourful full-page background */
+html{background:#f8f7ff}
+body{background:transparent;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 8% 8%,rgba(255,125,155,.24),transparent 38%),radial-gradient(ellipse at 92% 18%,rgba(112,190,255,.25),transparent 40%),radial-gradient(ellipse at 15% 58%,rgba(255,205,105,.22),transparent 42%),radial-gradient(ellipse at 88% 78%,rgba(125,220,180,.24),transparent 42%),linear-gradient(135deg,#fff9fb 0%,#f4f7ff 48%,#f7fff9 100%)}
 
 
     .story-copy>.kicker{font-weight:800}
