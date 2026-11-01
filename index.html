@@ -112,7 +112,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   </main>
   <footer><div class="wrap"><div class="footer-top"><div class="footer-about"><a class="brand" href="#home" style="color:#fff"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS</a><p>Big-hearted journeys for curious people. Made personal, one good trip at a time.</p></div><div class="footer-cols"><div><h4>Explore</h4><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a></div><div><h4>Need a hand?</h4><a href="#contact">Talk to a trip designer</a><a href="#contact">Travel notes</a></div><div><h4>Say hello</h4><a href="mailto:afzal_girach@rediffmail.com">afzal_girach@rediffmail.com</a><a href="tel:+918495086389">8495086389</a></div></div></div><div class="footer-bottom"><span>© 2026 Incredible Travels. All journeys welcome.</span><nav><a href="#contact">Privacy</a><a href="#contact">Terms</a><a href="#home">Back to top ↑</a></nav></div></div></footer>
   <script>
-    // Keep a continuous, silent rotation of different royalty-free travel videos.
+    // Continuous silent travel-video playlist.
     const travelVideo=document.getElementById('travel-video-bg');
     if(travelVideo){
       const travelClips=[
@@ -123,22 +123,27 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
         'https://videos.pexels.com/video-files/2126405/2126405-uhd_3840_2160_30fps.mp4'
       ];
       let travelClipIndex=0;
-      let travelAdvancePending=false;
-      const playNextTravelClip=()=>{
-        if(travelAdvancePending)return;
-        travelAdvancePending=true;
+      let changingTravelClip=false;
+      const playLoadedTravelClip=()=>{
+        changingTravelClip=false;
+        travelVideo.play().catch(()=>{});
+      };
+      const nextTravelClip=()=>{
+        if(changingTravelClip)return;
+        changingTravelClip=true;
         travelClipIndex=(travelClipIndex+1)%travelClips.length;
         travelVideo.src=travelClips[travelClipIndex];
         travelVideo.load();
-        travelVideo.play().catch(()=>{});
-        window.setTimeout(()=>{travelAdvancePending=false;},1200);
       };
-      travelVideo.addEventListener('ended',playNextTravelClip);
-      travelVideo.addEventListener('error',playNextTravelClip);
-      travelVideo.play().catch(()=>{});
+      travelVideo.addEventListener('ended',nextTravelClip);
+      travelVideo.addEventListener('error',nextTravelClip);
+      travelVideo.addEventListener('loadeddata',playLoadedTravelClip);
+      travelVideo.src=travelClips[travelClipIndex];
+      travelVideo.load();
     }
     // event.preventDefault();const country=document.getElementById('destination').value,style=document.getElementById('style').value,duration=document.getElementById('duration').value;let count=0;document.querySelectorAll('.trip').forEach(card=>{const days=Number(card.dataset.days),match=(!country||card.dataset.country===country)&&(!style||card.dataset.style.split(' ').includes(style))&&(!duration||(duration==='short'&&days<=9)||(duration==='long'&&days>=10));card.hidden=!match;if(match)count++});document.getElementById('results').textContent=count?`${count} ${count===1?'journey':'journeys'} match your search.`:'No trips match those choices yet. Try another combination.';document.getElementById('journeys').scrollIntoView({behavior:'smooth'})});
-    document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});\n    document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
+    document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});
+    document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
     const menu=document.querySelector('.menu'),links=document.querySelector('.links');if(menu&&links){menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}));}
 
     if ('serviceWorker' in navigator) {
