@@ -109,16 +109,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .install-app-btn[hidden]{display:none!important}
     @media(min-width:621px){.install-app-btn{display:none!important}}
     @media(max-width:620px){
-      /* Brand name stacked at left, description aligned to its right. */
+      /* Regular mobile website: keep the original brand line and tagline beneath it. */
       .nav{height:auto!important;min-height:76px;padding:8px 0;align-items:center;gap:8px}
-      .nav .brand{min-width:0;flex:1;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;line-height:1.15}
+      .nav .brand{min-width:0;flex:1;display:flex;flex-wrap:wrap;align-content:center;align-items:center;column-gap:6px;row-gap:2px;line-height:1.15}
       .nav .brand-icon{flex:0 0 34px}
-      .nav .brand-name{flex:0 0 78px;display:block;font:800 13px/1.12 var(--display);letter-spacing:-.045em;white-space:normal}
-      .mobile-brand-break{display:block}
-      .nav .brand-tagline{flex:1 1 auto;width:auto;max-width:none!important;min-width:0;margin:0!important;padding:0;white-space:normal;font-size:8.5px!important;line-height:1.25;text-align:left}
+      .nav .brand-name{display:contents;font:800 15px var(--display);letter-spacing:-.045em}
+      .mobile-brand-break{display:none}
+      .nav .brand-tagline{flex:0 0 calc(100% - 40px);width:calc(100% - 40px);max-width:none!important;margin:0 0 0 40px!important;padding:0;white-space:normal;font-size:9px!important;line-height:1.2;text-align:left}
       .nav .brand-tagline .tagline-last{white-space:normal;display:inline}
       .nav .install-app-btn{margin-left:0}
       .jumpbar{top:76px}
+
+      /* Installed PWA only: stack INCREDIBLE / TRAVELS and place description to the right. */
+      @media (display-mode:standalone){
+        .nav .brand{flex-wrap:nowrap;gap:6px}
+        .nav .brand-name{display:block;flex:0 0 78px;font:800 13px/1.12 var(--display);letter-spacing:-.045em;white-space:normal}
+        .mobile-brand-break{display:block}
+        .nav .brand-tagline{flex:1 1 auto;width:auto;max-width:none!important;min-width:0;margin:0!important;padding:0;white-space:normal;font-size:8.5px!important;line-height:1.25;text-align:left}
+      }
       .install-app-btn{display:inline-flex!important;flex:0 0 auto;align-items:center;justify-content:center;min-width:68px;height:34px;min-height:34px;padding:0 9px!important;margin-left:8px;border:0;border-radius:999px!important;background:var(--teal);color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
       .install-app-btn span{display:block;white-space:nowrap;font-size:9px;line-height:1}
     }
