@@ -143,6 +143,10 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   
       /* Keep the original domestic tour headings on one line on mobile browsers and installed apps. */
     @media(max-width:620px){.domestic-copy h3{white-space:nowrap;font-size:clamp(12px,4vw,20px);letter-spacing:-.035em;line-height:1.2}}
+  
+    /* Use black text for every description inside domestic tour cards. */
+    .domestic-card .domestic-copy p,
+    .domestic-card .domestic-copy .itinerary li{color:#000!important}
   </style>
 </head>
 <body>
