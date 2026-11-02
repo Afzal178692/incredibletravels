@@ -101,8 +101,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     /* Standing vertical pill button on mobile */
     @media(max-width:620px){.install-app-btn{width:38px!important;min-width:38px;height:62px!important;min-height:62px!important;padding:5px!important;border-radius:999px!important;display:flex;align-items:center;justify-content:center;overflow:hidden}.install-app-btn span{display:block;white-space:nowrap;writing-mode:horizontal-tb;text-orientation:mixed;transform:none;max-width:none;text-align:center;font-size:8px;line-height:1.15}}
 
-    /* Hide Install App button on mobile only */
-    @media(max-width:620px){.install-app-btn{display:none!important}}
+  
+    /* Mobile-only PWA install control */
+    .install-app-btn[hidden]{display:none!important}
+    @media(min-width:621px){.install-app-btn{display:none!important}}
+    @media(max-width:620px){
+      .nav .brand{min-width:0;flex:1;gap:6px}
+      .brand-tagline{max-width:100px!important;font-size:10px!important}
+      .install-app-btn{display:inline-flex!important;flex:0 0 auto;align-items:center;justify-content:center;min-width:68px;height:34px;min-height:34px;padding:0 9px!important;margin-left:8px;border:0;border-radius:999px!important;background:var(--teal);color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
+      .install-app-btn span{display:block;white-space:nowrap;font-size:9px;line-height:1}
+    }
+    .install-help-dialog{position:fixed;inset:0;margin:auto;width:min( calc(100% - 32px), 380px );max-width:380px;border:0;border-radius:18px;padding:28px 24px 24px;background:#fffefa;color:#102a32;box-shadow:0 24px 80px rgba(8,25,32,.28)}
+    .install-help-dialog::backdrop{background:rgba(8,25,32,.58);backdrop-filter:blur(3px)}
+    .install-help-dialog h2{font:700 25px/1.15 var(--display);letter-spacing:-.04em;margin:9px 0 12px}
+    .install-help-dialog p:not(.kicker){font-size:14px;line-height:1.7;color:#536469;margin:0 0 20px}
+    .install-help-dialog .kicker{margin:0;color:var(--teal)}
+    .install-help-close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:#f0eee7;color:#102a32;font-size:23px;line-height:1;cursor:pointer}
+    @media(max-width:620px){.install-help-dialog{padding:26px 20px 20px}}
+
   </style>
 </head>
 <body>
@@ -133,6 +149,15 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     <section class="membership-section" id="membership"><div class="wrap"><div class="membership-heading"><div class="kicker">Incredible Travels members</div><h2>Incredible Membership offers.</h2><p>Choose the membership level that’s right for you. Get in touch with our team to learn more about membership.</p></div><div class="membership-plans"><article class="membership-plan"><span class="membership-yearly">YEARLY</span><h3>Bronze</h3><div class="membership-price"><span>₹</span>299</div><p>Incredible Travels membership</p><p class="membership-inclusion"><strong>₹299 discount</strong><br>on your first purchase</p><p class="membership-inclusion"><strong>Best deals</strong><br>on Incredible Travels offers</p><p class="membership-inclusion"><strong>Discounts</strong><br>on air tickets and hotel stays</p><a class="btn" href="#contact" style="background:#cd7f32;color:#fff">Enquire now ↗</a></article><article class="membership-plan featured"><span class="membership-yearly">YEARLY</span><h3>Silver</h3><div class="membership-price"><span>₹</span>599</div><p>Incredible Travels membership</p><p class="membership-inclusion"><strong>₹599 discount</strong><br>on your first purchase</p><p class="membership-inclusion"><strong>1 complimentary surprise voucher</strong><br>every year</p><p class="membership-inclusion"><strong>Best deals</strong><br>on Incredible Travels offers</p><p class="membership-inclusion"><strong>Priority preference</strong><br>for bookings and services</p><p class="membership-inclusion"><strong>Discounts</strong><br>on air tickets, hotel stays and services</p><a class="btn" href="#contact" style="background:#c0c0c0;color:#17232b">Enquire now ↗</a></article><article class="membership-plan"><span class="membership-yearly">YEARLY</span><h3>Gold</h3><div class="membership-price"><span>₹</span>999</div><p>Incredible Travels membership</p><p class="membership-inclusion"><strong>₹999 discount</strong><br>on your first purchase</p><p class="membership-inclusion"><strong>2 complimentary surprise vouchers</strong><br>every year</p><p class="membership-inclusion"><strong>Best deals</strong><br>on Incredible Travels offers</p><p class="membership-inclusion"><strong>Priority preference</strong><br>for bookings and services</p><p class="membership-inclusion"><strong>Discounts</strong><br>on air tickets and hotel stays</p><p class="membership-inclusion"><strong>No service fee</strong></p><a class="btn" href="#contact" style="background:#d4af37;color:#17232b">Enquire now · Limited seats ↗</a></article></div></div></section>
   </main>
   <footer><div class="wrap"><div class="footer-top"><div class="footer-about"><a class="brand" href="#home" style="color:#fff"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS</a><p>Big-hearted journeys for curious people. Made personal, one good trip at a time.</p></div><div class="footer-cols"><div><h4>Explore</h4><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a></div><div><h4>Need a hand?</h4><a href="#contact">Talk to a trip designer</a><a href="#contact">Travel notes</a></div><div><h4>Say hello</h4><a href="mailto:afzal_girach@rediffmail.com">afzal_girach@rediffmail.com</a><a href="tel:+918495086389">8495086389</a></div></div></div><div class="footer-bottom"><span>© 2026 Incredible Travels. Powered by passion.</span><nav><a href="#contact">Privacy</a><a href="#contact">Terms</a><a href="#home">Back to top ↑</a></nav></div></div></footer>
+  
+  <dialog id="install-help-dialog" class="install-help-dialog" aria-labelledby="install-help-title">
+    <button type="button" class="install-help-close" id="install-help-close" aria-label="Close installation instructions">×</button>
+    <p class="kicker">Incredible Travels app</p>
+    <h2 id="install-help-title">Install on your phone</h2>
+    <p id="install-help-copy">Follow your browser’s installation steps to add Incredible Travels to your home screen.</p>
+    <button type="button" class="btn coral" id="install-help-done">Got it</button>
+  </dialog>
+
   <script>
     // YouTube background embed: muted autoplay, inline playback, hidden controls, and loop.
     // event.preventDefault();const country=document.getElementById('destination').value,style=document.getElementById('style').value,duration=document.getElementById('duration').value;let count=0;document.querySelectorAll('.trip').forEach(card=>{const days=Number(card.dataset.days),match=(!country||card.dataset.country===country)&&(!style||card.dataset.style.split(' ').includes(style))&&(!duration||(duration==='short'&&days<=9)||(duration==='long'&&days>=10));card.hidden=!match;if(match)count++});document.getElementById('results').textContent=count?`${count} ${count===1?'journey':'journeys'} match your search.`:'No trips match those choices yet. Try another combination.';document.getElementById('journeys').scrollIntoView({behavior:'smooth'})});
@@ -140,42 +165,85 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     const signupForm=document.getElementById('signup');if(signupForm){signupForm.addEventListener('submit',event=>{event.preventDefault();const thanks=document.getElementById('thanks');if(thanks)thanks.style.display='block'});}
     const menu=document.querySelector('.menu'),links=document.querySelector('.links');if(menu&&links){menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}));}
 
-    // Install the Incredible Travels PWA from supported mobile and desktop browsers.
-    let deferredInstallPrompt = null;
-    const installButton = document.getElementById('install-app-button');
-    window.addEventListener('beforeinstallprompt', event => {
-      event.preventDefault();
-      deferredInstallPrompt = event;
-      if (installButton) installButton.hidden = false;
-    });
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-      if (installButton) installButton.hidden = true;
-    }
-    if (installButton) {
-      installButton.addEventListener('click', async () => {
-        if (deferredInstallPrompt) {
-          deferredInstallPrompt.prompt();
-          await deferredInstallPrompt.userChoice;
-          deferredInstallPrompt = null;
-          return;
-        }
-        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-        const isAndroid = /android/i.test(navigator.userAgent);
-        const instructions = isIOS
-          ? 'To install Incredible Travels: tap the Share button in Safari, then choose “Add to Home Screen”.'
-          : isAndroid
-            ? 'To install Incredible Travels: open this page in Chrome, tap the ⋮ menu, then choose “Install app” or “Add to Home screen”.'
-            : 'To install Incredible Travels, use your browser menu and choose “Install app” or “Add to Home screen”.';
-        window.alert(instructions);
-      });
-    }
-    window.addEventListener('appinstalled', () => {
-      if (installButton) installButton.hidden = true;
-      deferredInstallPrompt = null;
-    });
+    // Mobile-first PWA installation with native prompt and accessible platform guidance.
+    (() => {
+      let deferredInstallPrompt = null;
+      const installButton = document.getElementById('install-app-button');
+      const installDialog = document.getElementById('install-help-dialog');
+      const installHelpCopy = document.getElementById('install-help-copy');
+      const closeDialog = () => {
+        if (installDialog && installDialog.open) installDialog.close();
+      };
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+      const isMobileDevice = window.matchMedia('(max-width: 620px)').matches ||
+        /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+      if (installButton) {
+        if (isStandalone || !isMobileDevice) installButton.hidden = true;
+
+        window.addEventListener('beforeinstallprompt', event => {
+          // Leave desktop browser installation UI untouched; this in-page control is mobile-only.
+          if (!isMobileDevice || isStandalone) return;
+          event.preventDefault();
+          deferredInstallPrompt = event;
+          installButton.hidden = false;
+        });
+
+        installButton.addEventListener('click', async () => {
+          if (deferredInstallPrompt) {
+            const promptEvent = deferredInstallPrompt;
+            deferredInstallPrompt = null;
+            try {
+              await promptEvent.prompt();
+              const choice = await promptEvent.userChoice;
+              if (choice && choice.outcome === 'accepted') installButton.hidden = true;
+            } catch (error) {
+              showInstallHelp();
+            }
+            return;
+          }
+          showInstallHelp();
+        });
+      }
+
+      function showInstallHelp() {
+        if (!installDialog || !installHelpCopy) return;
+        const ua = navigator.userAgent;
+        const isIOS = /iphone|ipad|ipod/i.test(ua) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const isAndroid = /android/i.test(ua);
+        installHelpCopy.textContent = isIOS
+          ? 'On your iPhone or iPad, open this page in Safari, tap Share, then choose “Add to Home Screen” and confirm.'
+          : isAndroid
+            ? 'In Chrome, tap the ⋮ menu and choose “Install app”. If that option is not shown yet, choose “Add to Home screen” or try again after browsing the site for a little while.'
+            : 'Open this website in a browser that supports app installation, then use its menu and choose “Install app” or “Add to Home screen”.';
+        if (typeof installDialog.showModal === 'function') installDialog.showModal();
+        else window.alert(installHelpCopy.textContent);
+      }
+
+      if (installDialog) {
+        document.getElementById('install-help-close')?.addEventListener('click', closeDialog);
+        document.getElementById('install-help-done')?.addEventListener('click', closeDialog);
+        installDialog.addEventListener('click', event => {
+          if (event.target === installDialog) closeDialog();
+        });
+      }
+
+      window.addEventListener('appinstalled', () => {
+        if (installButton) installButton.hidden = true;
+        deferredInstallPrompt = null;
+        closeDialog();
+      });
+    })();
+
+    // Register the offline-capable service worker.
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(error => {
+          console.warn('Incredible Travels offline support could not be registered.', error);
+        });
+      });
     }
   
     
