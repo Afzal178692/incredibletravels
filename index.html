@@ -85,11 +85,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .story .story-grid>.story-copy{background:rgba(244,241,233,.76)!important;background-image:none!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.62);padding:30px!important;border-radius:10px;box-shadow:0 12px 32px rgba(16,42,50,.18);position:relative;z-index:2}
     @media(max-width:768px){.story .story-grid>.story-copy{padding:22px!important}}
     @media(prefers-reduced-transparency:reduce){.story .story-grid>.story-copy{background:#f4f1e9!important;backdrop-filter:none;-webkit-backdrop-filter:none}}
-  </style>
+  \n    .install-app-btn{padding:11px 15px;background:var(--teal);white-space:nowrap;font-size:11px}.install-app-btn:hover{background:var(--ink)}@media(max-width:620px){.install-app-btn{padding:10px 12px;font-size:10px;margin-left:auto;margin-right:0}.brand-tagline{max-width:145px}}\n  </style>
 </head>
 <body>
 <iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0" title="Incredible Travels background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true" tabindex="-1"></iframe>
-<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div></div></header>
+<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#domestic">Find your trip ↗</a></div><button class="btn install-app-btn" id="install-app-button" type="button" aria-label="Install Incredible Travels app">＋ Install App</button></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
     <div class="hero"><div class="wrap"><div class="hero-card"><div class="hero-copy"><div class="eyebrow">Big-hearted trips for curious people</div><h1>Go feel<br><em>something.</em></h1><p>Take the long lunch. Miss the turn. Find the little café you’ll tell everyone about. This is travel made for being there.</p><div class="hero-actions"><a class="btn coral" href="#journeys">Explore the world ↗</a><a class="play-link" href="#story"><span class="play">▶</span> Get to know us</a></div></div></div></div></div>
@@ -121,6 +121,40 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     document.querySelectorAll('.save').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));button.textContent=saved?'♥':'♡';button.style.color=saved?'#e87850':''}));    document.getElementById('service-request').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget,data=new FormData(form),subject=encodeURIComponent(`Service request: ${data.get('service')}`),body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone / WhatsApp: ${data.get('phone')}\nService: ${data.get('service')}\nPreferred start date: ${data.get('date')||'Flexible'}\nTravelers: ${data.get('travelers')}\n\nNotes:\n${data.get('message')||'None'}`);window.location.href=`mailto:afzal_girach@rediffmail.com?subject=${subject}&body=${body}`});
     document.getElementById('signup').addEventListener('submit',event=>{event.preventDefault();document.getElementById('thanks').style.display='block'});
     const menu=document.querySelector('.menu'),links=document.querySelector('.links');if(menu&&links){menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}));}
+
+    // Install the Incredible Travels PWA from supported mobile and desktop browsers.
+    let deferredInstallPrompt = null;
+    const installButton = document.getElementById('install-app-button');
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      if (installButton) installButton.hidden = false;
+    });
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      if (installButton) installButton.hidden = true;
+    }
+    if (installButton) {
+      installButton.addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+          deferredInstallPrompt = null;
+          return;
+        }
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        const isAndroid = /android/i.test(navigator.userAgent);
+        const instructions = isIOS
+          ? 'To install Incredible Travels: tap the Share button in Safari, then choose “Add to Home Screen”.'
+          : isAndroid
+            ? 'To install Incredible Travels: open this page in Chrome, tap the ⋮ menu, then choose “Install app” or “Add to Home screen”.'
+            : 'To install Incredible Travels, use your browser menu and choose “Install app” or “Add to Home screen”.';
+        window.alert(instructions);
+      });
+    }
+    window.addEventListener('appinstalled', () => {
+      if (installButton) installButton.hidden = true;
+      deferredInstallPrompt = null;
+    });
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
