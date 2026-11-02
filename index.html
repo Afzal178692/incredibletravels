@@ -109,16 +109,16 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .install-app-btn[hidden]{display:none!important}
     @media(min-width:621px){.install-app-btn{display:none!important}}
     @media(max-width:620px){
-      /* Keep the mobile brand name and tagline on separate, readable rows. */
+      /* Brand name stacked at left, description aligned to its right. */
       .nav{height:auto!important;min-height:76px;padding:8px 0;align-items:center;gap:8px}
-      .nav .brand{min-width:0;flex:1;display:flex;flex-wrap:wrap;align-content:center;align-items:center;column-gap:6px;row-gap:2px;line-height:1.15}
+      .nav .brand{min-width:0;flex:1;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;line-height:1.15}
       .nav .brand-icon{flex:0 0 34px}
-      .nav .brand-tagline{flex:0 0 calc(100% - 40px);width:calc(100% - 40px);max-width:none!important;margin:0 0 0 40px!important;padding:0;white-space:normal;font-size:9px!important;line-height:1.2;text-align:left}
+      .nav .brand-name{flex:0 0 78px;display:block;font:800 13px/1.12 var(--display);letter-spacing:-.045em;white-space:normal}
+      .mobile-brand-break{display:block}
+      .nav .brand-tagline{flex:1 1 auto;width:auto;max-width:none!important;min-width:0;margin:0!important;padding:0;white-space:normal;font-size:8.5px!important;line-height:1.25;text-align:left}
       .nav .brand-tagline .tagline-last{white-space:normal;display:inline}
       .nav .install-app-btn{margin-left:0}
       .jumpbar{top:76px}
-
-      .brand-tagline{max-width:100px!important;font-size:10px!important}
       .install-app-btn{display:inline-flex!important;flex:0 0 auto;align-items:center;justify-content:center;min-width:68px;height:34px;min-height:34px;padding:0 9px!important;margin-left:8px;border:0;border-radius:999px!important;background:var(--teal);color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
       .install-app-btn span{display:block;white-space:nowrap;font-size:9px;line-height:1}
     }
@@ -134,7 +134,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </head>
 <body>
 <iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0" title="Incredible Travels background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true" tabindex="-1"></iframe>
-<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span> INCREDIBLE TRAVELS<span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#journeys">Find your trip ↗</a></div><button class="btn install-app-btn" id="install-app-button" type="button" aria-label="Install Incredible Travels app"><span>Install App</span></button></div></header>
+<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span><span class="brand-name">INCREDIBLE<br class="mobile-brand-break"> TRAVELS</span><span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#journeys">Find your trip ↗</a></div><button class="btn install-app-btn" id="install-app-button" type="button" aria-label="Install Incredible Travels app"><span>Install App</span></button></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
     <div class="hero"><div class="wrap"><div class="hero-card"><div class="hero-copy"><div class="eyebrow">Big-hearted trips for curious people</div><h1>Go feel<br><em>something.</em></h1><p>Take the long lunch. Miss the turn. Find the little café you’ll tell everyone about. This is travel made for being there.</p><div class="hero-actions"><a class="btn coral" href="#journeys">Explore the world ↗</a><a class="play-link" href="#story"><span class="play">▶</span> Get to know us</a></div></div></div></div></div>
