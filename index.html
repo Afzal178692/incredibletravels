@@ -141,6 +141,8 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     @media(max-width:620px){.install-help-dialog{padding:26px 20px 20px}}
 
   
+      /* Keep the original domestic tour headings on one line on mobile browsers and installed apps. */
+    @media(max-width:620px){.domestic-copy h3{white-space:nowrap;font-size:clamp(12px,4vw,20px);letter-spacing:-.035em;line-height:1.2}}
   </style>
 </head>
 <body>
