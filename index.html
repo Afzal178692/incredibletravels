@@ -109,7 +109,15 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .install-app-btn[hidden]{display:none!important}
     @media(min-width:621px){.install-app-btn{display:none!important}}
     @media(max-width:620px){
-      .nav .brand{min-width:0;flex:1;gap:6px}
+      /* Keep the mobile brand name and tagline on separate, readable rows. */
+      .nav{height:auto!important;min-height:76px;padding:8px 0;align-items:center;gap:8px}
+      .nav .brand{min-width:0;flex:1;display:flex;flex-wrap:wrap;align-content:center;align-items:center;column-gap:6px;row-gap:2px;line-height:1.15}
+      .nav .brand-icon{flex:0 0 34px}
+      .nav .brand-tagline{flex:0 0 calc(100% - 40px);width:calc(100% - 40px);max-width:none!important;margin:0 0 0 40px!important;padding:0;white-space:normal;font-size:9px!important;line-height:1.2;text-align:left}
+      .nav .brand-tagline .tagline-last{white-space:normal;display:inline}
+      .nav .install-app-btn{margin-left:0}
+      .jumpbar{top:76px}
+
       .brand-tagline{max-width:100px!important;font-size:10px!important}
       .install-app-btn{display:inline-flex!important;flex:0 0 auto;align-items:center;justify-content:center;min-width:68px;height:34px;min-height:34px;padding:0 9px!important;margin-left:8px;border:0;border-radius:999px!important;background:var(--teal);color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
       .install-app-btn span{display:block;white-space:nowrap;font-size:9px;line-height:1}
