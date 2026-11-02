@@ -1,12 +1,17 @@
 {
+  "id": "./",
   "name": "Incredible Travels",
   "short_name": "Incredible",
   "description": "Explore journeys, tours and travel services with Incredible Travels.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
   "background_color": "#f7f5ef",
   "theme_color": "#102a32",
+  "categories": ["travel", "lifestyle"],
   "icons": [
     {
       "src": "./app-icon.svg",
