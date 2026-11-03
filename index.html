@@ -429,6 +429,23 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     })();
 
 
+    // Scroll the membership quick-link below the complete sticky navigation stack.
+    (() => {
+      const membershipLink = document.querySelector('.jumpbar a[href="#membership"]');
+      const membershipSection = document.getElementById('membership');
+      if (!membershipLink || !membershipSection) return;
+      membershipLink.addEventListener('click', event => {
+        event.preventDefault();
+        history.replaceState(null, '', '#membership');
+        const stickyHeight = ['.diwali-banner', '.header', '.jumpbar']
+          .map(selector => document.querySelector(selector))
+          .filter(element => element && getComputedStyle(element).display !== 'none')
+          .reduce((total, element) => total + element.getBoundingClientRect().height, 0);
+        const top = membershipSection.getBoundingClientRect().top + window.scrollY - stickyHeight - 12;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      });
+    })();
+
     // Register the offline-capable service worker.
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
