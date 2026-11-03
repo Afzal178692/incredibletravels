@@ -508,6 +508,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     border-bottom:0!important;
   }
 </style>
+<style id="taskbar-white-seam-removal">
+  /* Close the visible white seam: overlap the taskbar against the header by 6px. */
+  html body .header {
+    margin-bottom:-6px!important;
+    border-bottom:0!important;
+  }
+  html body nav.jumpbar {
+    margin-top:0!important;
+    top:calc(var(--jumpbar-sticky-top, 116px) - 6px)!important;
+    border-top:2px solid #d8a34a!important;
+    background:#fffaf0!important;
+  }
+  html body nav.jumpbar::before {
+    top:0!important;
+    height:2px!important;
+    background:#d8a34a!important;
+  }
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
