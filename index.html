@@ -301,6 +301,12 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   transform:none!important;
 }
 
+  
+/* Remove the browser's blue tap flash from the navigation bar below the header. */
+.jumpbar,.jumpbar a{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}
+.jumpbar a:active,.jumpbar a:focus{background:transparent;color:inherit}
+.jumpbar a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+
   </style>
 </head>
 <body>
