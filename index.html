@@ -147,6 +147,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     /* Use black text for every description inside domestic tour cards. */
     .domestic-card .domestic-copy p,
     .domestic-card .domestic-copy .itinerary li{color:#000!important}
+
+    /* Brighter translucent glass finish for domestic tour cards */
+    .domestic-grid>.domestic-card{background:rgba(255,255,255,.84)!important;background-image:none!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 34px rgba(16,42,50,.10)}
+    @media(prefers-reduced-transparency:reduce){.domestic-grid>.domestic-card{background:#fff!important;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
   </style>
 </head>
 <body>
