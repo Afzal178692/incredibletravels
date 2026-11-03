@@ -360,6 +360,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   }
 </style>
 
+<style id="taskbar-no-shrink-fix">
+  /* Keep the taskbar and each navigation button at a fixed size on resize/minimize. */
+  nav.jumpbar { height:32px!important; min-height:32px!important; flex:0 0 32px!important; }
+  nav.jumpbar .wrap {
+    height:32px!important; min-height:32px!important; max-height:32px!important;
+    display:flex!important; flex-wrap:nowrap!important; align-items:stretch!important;
+    overflow-x:auto!important; overflow-y:hidden!important;
+  }
+  nav.jumpbar a {
+    box-sizing:border-box!important; display:flex!important; flex:0 0 auto!important;
+    flex-shrink:0!important; height:32px!important; min-height:32px!important;
+    max-height:32px!important; align-items:center!important; white-space:nowrap!important;
+    transform:none!important; line-height:1!important; font-size:13px!important;
+  }
+  @media(max-width:620px) {
+    nav.jumpbar a { font-size:10px!important; }
+  }
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
