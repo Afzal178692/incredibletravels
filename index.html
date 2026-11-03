@@ -437,6 +437,14 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       membershipLink.addEventListener('click', event => {
         event.preventDefault();
         history.replaceState(null, '', '#membership');
+        // Keep the complete selected quick-link visible inside the horizontally scrollable task bar.
+        const taskBarViewport = membershipLink.closest('.jumpbar')?.querySelector('.wrap');
+        if (taskBarViewport) {
+          const linkLeft = membershipLink.getBoundingClientRect().left -
+            taskBarViewport.getBoundingClientRect().left + taskBarViewport.scrollLeft;
+          const centeredLeft = linkLeft - (taskBarViewport.clientWidth - membershipLink.offsetWidth) / 2;
+          taskBarViewport.scrollTo({ left: Math.max(0, centeredLeft), behavior: 'smooth' });
+        }
         const stickyHeight = ['.diwali-banner', '.header', '.jumpbar']
           .map(selector => document.querySelector(selector))
           .filter(element => element && getComputedStyle(element).display !== 'none')
