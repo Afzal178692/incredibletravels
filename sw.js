@@ -1,4 +1,4 @@
-const CACHE_NAME = "incredible-travels-v28";
+const CACHE_NAME = "incredible-travels-v29";
 const APP_SHELL = [
   new URL("./", self.location).href,
   new URL("./index.html", self.location).href,
@@ -33,7 +33,7 @@ self.addEventListener("fetch", event => {
   if (request.mode === "navigate") {
     event.respondWith((async () => {
       try {
-        const response = await fetch(request);
+        const response = await fetch(new Request(request, { cache: "no-store" }));
         if (response.ok) {
           const cache = await caches.open(CACHE_NAME);
           await cache.put(request, response.clone());
@@ -52,7 +52,7 @@ self.addEventListener("fetch", event => {
       url.pathname.endsWith(".webmanifest")) {
     event.respondWith((async () => {
       const cached = await caches.match(request);
-      const network = fetch(request).then(async response => {
+      const network = fetch(new Request(request, { cache: "no-store" })).then(async response => {
         if (response.ok) {
           const cache = await caches.open(CACHE_NAME);
           await cache.put(request, response.clone());
