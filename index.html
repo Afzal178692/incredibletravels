@@ -526,28 +526,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     background:#d8a34a!important;
   }
 </style>
-<style id="taskbar-seam-selection-fix">
-  /* Keep all three sticky rows touching; selecting a quick link must not reveal a white seam. */
-  html body .diwali-banner {
-    position:sticky!important; top:0!important; z-index:30!important;
-  }
-  html body .header {
-    position:sticky!important;
-    top:var(--diwali-banner-height,38px)!important;
-    margin:0!important;
-    border-bottom:0!important;
-    z-index:20!important;
-  }
-  html body nav.jumpbar {
-    position:sticky!important;
-    top:var(--jumpbar-sticky-top,138px)!important;
-    margin:0!important;
-    border-top:0!important;
-    box-shadow:none!important;
-    z-index:60!important;
-  }
-  html body nav.jumpbar::before { display:none!important; }
-</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
@@ -724,7 +702,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     if (!bar) return;
     const bannerHeight = banner && getComputedStyle(banner).display !== 'none' ? banner.getBoundingClientRect().height : 0;
     const headerHeight = header && getComputedStyle(header).display !== 'none' ? header.getBoundingClientRect().height : 0;
-    document.documentElement.style.setProperty('--diwali-banner-height', Math.ceil(bannerHeight) + 'px');
     bar.style.setProperty('--jumpbar-sticky-top', Math.ceil(bannerHeight + headerHeight) + 'px');
   };
   updateTaskbarOffset();
