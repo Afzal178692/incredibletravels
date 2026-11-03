@@ -486,6 +486,16 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     z-index:5;pointer-events:none;
   }
 </style>
+<style id="taskbar-button-height-adjustment">
+  /* Shorter buttons inside the unchanged taskbar track. */
+  html body nav.jumpbar > .wrap > a {
+    height:30px!important;
+    min-height:30px!important;
+    max-height:30px!important;
+    align-self:center!important;
+    box-sizing:border-box!important;
+  }
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
