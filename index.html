@@ -408,6 +408,67 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     html body nav.jumpbar > .wrap > a { font-size:10px!important; }
   }
 </style>
+<style id="taskbar-fixed-on-scroll-final">
+  /* One authoritative sizing rule; sticky bar remains identical before and during scroll. */
+  html body nav.jumpbar {
+    position:sticky!important;
+    top:104px!important;
+    z-index:50!important;
+    display:block!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    height:36px!important;
+    min-height:36px!important;
+    max-height:36px!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+    transition:none!important;
+    animation:none!important;
+  }
+  html body nav.jumpbar > .wrap {
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    width:100%!important;
+    height:36px!important;
+    min-height:36px!important;
+    max-height:36px!important;
+    padding:0!important;
+    margin:0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    transform:none!important;
+    transition:none!important;
+    animation:none!important;
+  }
+  html body nav.jumpbar > .wrap > a {
+    display:flex!important;
+    flex:0 0 auto!important;
+    flex-shrink:0!important;
+    align-items:center!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+    height:36px!important;
+    min-height:36px!important;
+    max-height:36px!important;
+    padding:0 9px!important;
+    margin:0!important;
+    white-space:nowrap!important;
+    line-height:1!important;
+    transform:none!important;
+    transition:none!important;
+    animation:none!important;
+  }
+  @media(max-width:620px) {
+    html body nav.jumpbar { top:104px!important; }
+    html body nav.jumpbar,
+    html body nav.jumpbar > .wrap { height:36px!important; min-height:36px!important; max-height:36px!important; }
+    html body nav.jumpbar > .wrap > a { height:36px!important; min-height:36px!important; max-height:36px!important; font-size:10px!important; }
+  }
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
