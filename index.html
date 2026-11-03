@@ -312,6 +312,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     /* Compact the sticky task bar after the visitor starts scrolling. */
 
     .jumpbar a.is-active:hover{color:#351b3d!important}
+    /* Lock quick-link button dimensions so they never shrink during page scrolling. */
+    .jumpbar,.jumpbar .wrap{min-height:32px!important;height:32px!important}
+    .jumpbar .wrap{align-items:stretch!important}
+    .jumpbar a{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;min-height:32px!important;height:32px!important;padding:9px 7px!important;font-size:9px!important;line-height:1.2!important;transform:none!important;transition:background-color .2s ease,color .2s ease!important}
+
   </style>
 </head>
 <body>
