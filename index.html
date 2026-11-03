@@ -307,6 +307,9 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .jumpbar a:active,.jumpbar a:focus{background:transparent;color:inherit}
 .jumpbar a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
 
+    /* Selected task-bar item uses the same warm Diwali accent as the navigation controls. */
+    .jumpbar a.is-active{background:linear-gradient(135deg,#f5b642,#e87828)!important;color:#351b3d!important;box-shadow:inset 0 -3px 0 #6c315b}
+    .jumpbar a.is-active:hover{color:#351b3d!important}
   </style>
 </head>
 <body>
@@ -428,6 +431,18 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       });
     })();
 
+
+    // Highlight the selected quick-link consistently across the task bar.
+    document.querySelectorAll(".jumpbar a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.querySelectorAll(".jumpbar a").forEach(item => {
+          item.classList.remove("is-active");
+          item.removeAttribute("aria-current");
+        });
+        link.classList.add("is-active");
+        link.setAttribute("aria-current", "location");
+      });
+    });
 
     // Scroll the membership quick-link below the complete sticky navigation stack.
     (() => {
