@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#e87850"/>
-  <text x="256" y="276" text-anchor="middle" dominant-baseline="central"
-        font-family="Arial Unicode MS, Noto Sans Symbols, DejaVu Sans, sans-serif"
-        font-size="330" font-weight="400" fill="#fffefa">✳</text>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3a52e"/>
+      <stop offset="1" stop-color="#c84d35"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#brand)"/>
+  <g fill="none" stroke="#fffefa" stroke-width="24" stroke-linecap="round">
+    <path d="M256 116V396M116 256H396M157 157L355 355M355 157L157 355"/>
+  </g>
+  <circle cx="256" cy="256" r="19" fill="#fffefa"/>
 </svg>
