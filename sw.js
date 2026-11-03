@@ -1,9 +1,10 @@
-const CACHE_NAME = "incredible-travels-v13";
+const CACHE_NAME = "incredible-travels-v14";
 const APP_SHELL = [
   new URL("./", self.location).href,
   new URL("./index.html", self.location).href,
   new URL("./manifest.webmanifest", self.location).href,
-  new URL("./app-icon.svg", self.location).href
+  new URL("./app-icon.svg", self.location).href,
+  new URL("./app-icon-512.png", self.location).href
 ];
 
 self.addEventListener("install", event => {
