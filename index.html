@@ -256,7 +256,25 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       .header,.jumpbar{background:rgba(255,249,237,.98)!important}
     }
 
-  </style>
+  
+/* Mobile Diwali background correction */
+@media(max-width:850px){
+  #travel-video-bg{display:none!important}
+  html{background:#fff7e8!important}
+  body{background:#fff7e8!important;background-image:linear-gradient(180deg,#fffaf0 0%,#fff4e3 48%,#fffaf2 100%)!important;color:#321b3d!important}
+  body:before{opacity:.16!important}
+  .hero{background:linear-gradient(135deg,#fff0d5,#f8dfd2 52%,#f6e8c8)!important;padding-bottom:28px!important}
+  .story{background:#fff8eb!important}
+  .domestic{background:#fff0d8!important}
+  .membership-section{background:linear-gradient(135deg,#fff0d6,#fff9ed 52%,#fbe8dc)!important}
+  .request-section{background:linear-gradient(135deg,#f8e5d0,#fff6e8)!important}
+  .newsletter{background:#fff4e3!important}
+  .domestic-grid>.domestic-card,.trip,.membership-plan,.finder,.request-box,.newsletter-box{background:#fffdf7!important;border-color:#ebd0a9!important}
+  .footer{background:#321b3d!important}
+}
+@media(max-width:850px) and (display-mode:standalone){#travel-video-bg{display:none!important}}
+
+</style>
 </head>
 <body>
 <iframe id="travel-video-bg" src="https://www.youtube-nocookie.com/embed/EYTk5iL5dPw?autoplay=1&mute=1&controls=0&loop=1&playlist=EYTk5iL5dPw&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0" title="Incredible Travels background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" aria-hidden="true" tabindex="-1"></iframe>
