@@ -332,7 +332,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       .jumpbar a{font-size:13px!important}
     }
 
-  </style>
+  
+    /* Final authoritative task-bar type size: override earlier mobile 9px rules. */
+    nav.jumpbar a{
+      font-size:16px!important;
+      font-weight:700!important;
+      line-height:1.15!important;
+      letter-spacing:0!important;
+      height:32px!important;
+      min-height:32px!important;
+      padding:0 7px!important;
+      flex:0 0 auto!important;
+      transform:none!important;
+    }
+    @media(max-width:850px){
+      nav.jumpbar a{font-size:13px!important;line-height:1.15!important}
+    }
+
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
