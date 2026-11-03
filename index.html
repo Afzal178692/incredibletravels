@@ -287,7 +287,21 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   .jumpbar{top:104px!important}
 }
 
-</style>
+
+/* Keep every content card immediate and stationary during mobile-app scrolling. */
+.trip,.domestic-card,.membership-plan,.destination{
+  animation:none!important;
+  transition:none!important;
+  transform:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  content-visibility:visible!important;
+}
+.trip:hover,.destination:hover img{
+  transform:none!important;
+}
+
+  </style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
