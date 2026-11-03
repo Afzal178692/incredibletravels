@@ -434,19 +434,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
         deferredInstallPrompt = null;
         closeDialog();
       });
-    })();
-
-
-    // Shrink the sticky task-bar buttons while the page is scrolled.
-    (() => {
-      const taskBar = document.querySelector('.jumpbar');
-      if (!taskBar) return;
-      const updateTaskBarSize = () => taskBar.classList.toggle('is-compact', window.scrollY > 40);
-      updateTaskBarSize();
-      window.addEventListener('scroll', updateTaskBarSize, { passive: true });
-    })();
-
-    // Highlight the selected quick-link consistently across the task bar.
+    })();// Highlight the selected quick-link consistently across the task bar.
     document.querySelectorAll(".jumpbar a").forEach(link => {
       link.addEventListener("click", () => {
         document.querySelectorAll(".jumpbar a").forEach(item => {
