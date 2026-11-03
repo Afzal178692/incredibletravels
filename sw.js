@@ -1,4 +1,4 @@
-const CACHE_NAME = "incredible-travels-v22";
+const CACHE_NAME = "incredible-travels-v23";
 const APP_SHELL = [
   new URL("./", self.location).href,
   new URL("./index.html", self.location).href,
