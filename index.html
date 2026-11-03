@@ -469,6 +469,23 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     html body nav.jumpbar > .wrap > a { height:36px!important; min-height:36px!important; max-height:36px!important; font-size:10px!important; }
   }
 </style>
+<style id="taskbar-visible-top-edge">
+  html body nav.jumpbar {
+    border-top:2px solid #d8a34a!important;
+    border-bottom:1px solid #efd8b8!important;
+    box-shadow:0 -1px 0 rgba(255,255,255,.95), 0 2px 5px rgba(45,28,38,.12)!important;
+    background:rgba(255,251,242,.99)!important;
+    z-index:60!important;
+    top:var(--jumpbar-sticky-top,116px)!important;
+  }
+  html body nav.jumpbar::before {
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;height:2px;
+    display:block;background:#d8a34a;
+    z-index:5;pointer-events:none;
+  }
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
@@ -636,6 +653,27 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     
 
   </script>
+<script id="taskbar-sticky-offset">
+(() => {
+  const updateTaskbarOffset = () => {
+    const banner = document.querySelector('.diwali-banner');
+    const header = document.querySelector('.header');
+    const bar = document.querySelector('nav.jumpbar');
+    if (!bar) return;
+    const bannerHeight = banner && getComputedStyle(banner).display !== 'none' ? banner.getBoundingClientRect().height : 0;
+    const headerHeight = header && getComputedStyle(header).display !== 'none' ? header.getBoundingClientRect().height : 0;
+    bar.style.setProperty('--jumpbar-sticky-top', Math.ceil(bannerHeight + headerHeight) + 'px');
+  };
+  updateTaskbarOffset();
+  window.addEventListener('load', updateTaskbarOffset, {once:true});
+  window.addEventListener('resize', updateTaskbarOffset, {passive:true});
+  window.addEventListener('orientationchange', updateTaskbarOffset, {passive:true});
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(updateTaskbarOffset);
+    document.querySelectorAll('.diwali-banner,.header').forEach(el => observer.observe(el));
+  }
+})();
+</script>
 </body>
 </html>
 
