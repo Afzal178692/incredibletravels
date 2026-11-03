@@ -307,7 +307,19 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .jumpbar a:active,.jumpbar a:focus{background:transparent;color:inherit}
 .jumpbar a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
 
-  </style>
+  
+/* Ensure the membership heading and first plan are fully clear of the stacked sticky bars after navigation. */
+html{scroll-padding-top:180px}
+#membership{scroll-margin-top:180px!important;}
+@media(max-width:620px){
+  html{scroll-padding-top:166px;}
+  #membership{scroll-margin-top:166px!important;}
+}
+@media(max-width:620px) and (display-mode:standalone){
+  html{scroll-padding-top:174px;}
+  #membership{scroll-margin-top:174px!important;}
+}
+</style>
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
