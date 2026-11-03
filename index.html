@@ -223,6 +223,39 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       .domestic-grid>.domestic-card{background:#fffdf7!important}
     }
 
+
+    /* Mobile browser + installed app: enforce the same Diwali palette after responsive rules */
+    @media(max-width:850px){
+      html,body{background-color:#fff7e8!important;color:#321b3d}
+      body{background-image:linear-gradient(180deg,#fffaf0 0%,#fff4e3 52%,#fffaf2 100%)!important}
+      .announcement{background:#351b3d!important;color:#fff4dc!important}
+      .header{background:rgba(255,249,237,.97)!important;border-bottom-color:#eacb9d!important}
+      .nav .brand-icon{background:linear-gradient(135deg,#f3a52e,#c84d35)!important}
+      .jumpbar{background:rgba(255,251,242,.98)!important;border-bottom-color:#efd8b8!important}
+      .jumpbar a{color:#604b63}
+      .btn,.actions .btn{background:linear-gradient(135deg,#6c315b,#3b2046)!important;color:#fff!important}
+      .btn.coral,.install-app-btn{background:linear-gradient(135deg,#f5b642,#e87828)!important;color:#351b3d!important}
+      .hero-card{border:1px solid rgba(255,210,132,.55);box-shadow:0 14px 32px rgba(68,35,55,.16)}
+      .hero-card:before{background:linear-gradient(90deg,rgba(47,23,53,.91),rgba(76,34,60,.68) 48%,rgba(55,27,45,.12) 88%),linear-gradient(0deg,rgba(48,24,49,.38),transparent 50%)!important}
+      .section-head h2,.story-copy h2,.membership-heading h2{color:#432449}
+      .domestic{background:rgba(255,235,205,.72)!important}
+      .domestic-grid>.domestic-card{background:rgba(255,253,247,.94)!important;border-color:rgba(224,174,107,.7)!important}
+      .membership-section{background:linear-gradient(135deg,#fff0d6,#fff9ed 52%,#fbe8dc)!important}
+      .membership-plan{background:rgba(255,253,247,.96)!important;border-color:#ebd0a9!important}
+      .membership-plan.featured{border-color:#d98a32!important}
+      .request-section{background:linear-gradient(135deg,#f8e5d0,#fff6e8)!important}
+      .footer{background:#321b3d!important;color:#fff4e2!important}
+      .footer-cols a{color:#e8d4dc}
+    }
+    @media(max-width:620px){
+      body:before{opacity:.18;background-size:28px 28px}
+      .install-app-btn{box-shadow:0 4px 12px rgba(89,48,55,.2)!important}
+    }
+    @media(display-mode:standalone){
+      html,body{background-color:#fff7e8!important}
+      .header,.jumpbar{background:rgba(255,249,237,.98)!important}
+    }
+
   </style>
 </head>
 <body>
