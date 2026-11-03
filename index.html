@@ -286,6 +286,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   .header{top:38px}
   .jumpbar{top:104px!important}
 }
+
+/* Scroll reveal: cards remain visible by default and softly brighten as they enter view. */
+@keyframes card-scroll-appear{from{opacity:.72}to{opacity:1}}
+.scroll-card-enter{animation:card-scroll-appear .55s ease-out both}
+@media(prefers-reduced-motion:reduce){.scroll-card-enter{animation:none}}
 </style>
 </head>
 <body>
@@ -405,6 +410,22 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
         deferredInstallPrompt = null;
         closeDialog();
       });
+    })();
+
+
+    // Gentle scroll appearance for content cards. Cards are visible by default,
+    // so they never disappear if the observer is unavailable or delayed.
+    (() => {
+      const cards = document.querySelectorAll('.domestic-card, .trip, .membership-plan, .destination');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('scroll-card-enter');
+          observer.unobserve(entry.target);
+        });
+      }, { root:null, rootMargin:'0px 0px -5% 0px', threshold:0.08 });
+      cards.forEach(card => { if (!card.hidden) observer.observe(card); });
     })();
 
     // Register the offline-capable service worker.
