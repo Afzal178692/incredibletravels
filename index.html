@@ -681,6 +681,30 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       });
     })();
 
+    // Keep the International tours quick-link fully visible and scroll its section into view.
+    (() => {
+      const internationalLink = document.querySelector('.jumpbar a[href="#journeys"]');
+      const internationalSection = document.getElementById('journeys');
+      if (!internationalLink || !internationalSection) return;
+      internationalLink.addEventListener('click', event => {
+        event.preventDefault();
+        history.replaceState(null, '', '#journeys');
+        const taskBarViewport = internationalLink.closest('.jumpbar')?.querySelector('.wrap');
+        if (taskBarViewport) {
+          const linkLeft = internationalLink.getBoundingClientRect().left -
+            taskBarViewport.getBoundingClientRect().left + taskBarViewport.scrollLeft;
+          const centeredLeft = linkLeft - (taskBarViewport.clientWidth - internationalLink.offsetWidth) / 2;
+          taskBarViewport.scrollTo({ left: Math.max(0, centeredLeft), behavior: 'smooth' });
+        }
+        const stickyHeight = ['.diwali-banner', '.header', '.jumpbar']
+          .map(selector => document.querySelector(selector))
+          .filter(element => element && getComputedStyle(element).display !== 'none')
+          .reduce((total, element) => total + element.getBoundingClientRect().height, 0);
+        const top = internationalSection.getBoundingClientRect().top + window.scrollY - stickyHeight - 12;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      });
+    })();
+
     // Register the offline-capable service worker.
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
