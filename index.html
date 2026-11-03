@@ -350,6 +350,16 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
 
 </style>
+
+<style id="taskbar-font-size-final">
+  /* Final taskbar type scale: smaller labels, unchanged 32px bar. */
+  nav.jumpbar, nav.jumpbar .wrap { height:32px!important; min-height:32px!important; }
+  nav.jumpbar a { font-size:13px!important; line-height:1!important; }
+  @media(max-width:620px) {
+    nav.jumpbar a { font-size:10px!important; line-height:1!important; }
+  }
+</style>
+
 </head>
 <body>
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4"></video>
