@@ -152,6 +152,77 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .domestic-grid>.domestic-card{background:rgba(255,255,255,.84)!important;background-image:none!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 34px rgba(16,42,50,.10)}
     @media(prefers-reduced-transparency:reduce){.domestic-grid>.domestic-card{background:#fff!important;backdrop-filter:none;-webkit-backdrop-filter:none}}
 
+
+    /* Diwali celebration theme — warm marigold, festive plum and diya gold */
+    :root{
+      --ink:#321b3d;
+      --teal:#8a3f58;
+      --coral:#e87928;
+      --gold:#f5bd45;
+      --cream:#fff7e8;
+      --white:#fffdf7;
+      --muted:#756477;
+      --line:#f0d9b5;
+    }
+    html{background:#fff7e8}
+    body{
+      background:
+        radial-gradient(ellipse at 8% 8%,rgba(255,190,72,.13),transparent 28%),
+        radial-gradient(ellipse at 92% 24%,rgba(164,67,91,.09),transparent 30%),
+        linear-gradient(180deg,#fffaf0 0%,#fff6e8 48%,#fffaf2 100%);
+      color:var(--ink)
+    }
+    body:before{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;
+      background-image:radial-gradient(circle,rgba(220,145,45,.34) 1px,transparent 1.5px);
+      background-size:34px 34px;
+      mask-image:linear-gradient(180deg,black,transparent 72%)
+    }
+    .announcement{background:#351b3d;color:#fff4dc}
+    .announcement i{color:#ffc65a}
+    .header{background:rgba(255,249,237,.94);border-bottom:1px solid #eacb9d}
+    .brand-icon{background:linear-gradient(135deg,#f3a52e,#c84d35);box-shadow:0 4px 14px rgba(173,79,35,.2)}
+    .links{color:#604b63}
+    .links a:hover,.footer-cols a:hover{color:#f5bd45}
+    .jumpbar{background:rgba(255,251,242,.96);border-bottom:1px solid #efd8b8}
+    .jumpbar a:hover{color:#c45b32}
+    .btn{background:linear-gradient(135deg,#6c315b,#3b2046);box-shadow:0 5px 15px rgba(66,30,65,.16)}
+    .btn:hover{background:linear-gradient(135deg,#8b3d59,#55264d)}
+    .btn.coral{background:linear-gradient(135deg,#f5b642,#e87828);color:#351b3d}
+    .btn.coral:hover{background:linear-gradient(135deg,#ffd06b,#ed8b36)}
+    .hero-card{box-shadow:0 18px 42px rgba(68,35,55,.17);border:1px solid rgba(255,210,132,.45)}
+    .hero-card:before{
+      background:linear-gradient(90deg,rgba(47,23,53,.91),rgba(76,34,60,.68) 48%,rgba(55,27,45,.12) 88%),
+      linear-gradient(0deg,rgba(48,24,49,.38),transparent 50%)
+    }
+    .hero-copy .eyebrow,.eyebrow{color:#ffd06b}
+    .section-head h2,.story-copy h2,.membership-heading h2{color:#432449}
+    .section-aside{color:#725f70}
+    .destination,.trip,.story-photo,.request-box,.membership-plan{
+      box-shadow:0 12px 30px rgba(89,49,63,.09)
+    }
+    .domestic{background:rgba(255,235,205,.64)}
+    .domestic-grid>.domestic-card{
+      background:rgba(255,253,247,.91)!important;
+      border:1px solid rgba(224,174,107,.62);
+      box-shadow:0 14px 34px rgba(94,54,54,.12)
+    }
+    .domestic-copy .place,.domestic-meta{color:#8a3f58}
+    .membership-section{background:linear-gradient(135deg,#fff0d6,#fff9ed 52%,#fbe8dc)}
+    .membership-plan{background:rgba(255,253,247,.94);border-color:#ebd0a9}
+    .membership-plan.featured{border-color:#d98a32;box-shadow:0 16px 38px rgba(173,93,39,.18)}
+    .membership-yearly,.membership-price{color:#7a3456}
+    .request-section{background:linear-gradient(135deg,#f8e5d0,#fff6e8)}
+    .request-box{border:1px solid #e9c99d}
+    .footer{background:#321b3d;color:#fff4e2}
+    .footer-bottom{border-color:#ffffff30}
+    .install-app-btn{background:linear-gradient(135deg,#f5b642,#e87828)!important;color:#351b3d!important}
+    .install-help-dialog{border:1px solid #e8c58e}
+    @media(prefers-reduced-transparency:reduce){
+      .header,.jumpbar{background:#fff8eb}
+      .domestic-grid>.domestic-card{background:#fffdf7!important}
+    }
+
   </style>
 </head>
 <body>
