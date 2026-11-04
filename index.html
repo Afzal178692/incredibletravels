@@ -946,6 +946,69 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   }
 </style>
 
+
+<style id="final-taskbar-below-brand-no-divider">
+  /* Position the complete quick-link bar immediately below the full brand header. */
+  html body > header.header {
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    margin:0!important;
+    border:0!important;
+    border-bottom:0!important;
+    box-shadow:none!important;
+    z-index:1000!important;
+  }
+  html body > nav.jumpbar {
+    position:fixed!important;
+    top:var(--brand-header-height,116px)!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    margin:0!important;
+    border:0!important;
+    border-top:0!important;
+    box-shadow:none!important;
+    outline:0!important;
+    z-index:999!important;
+    background:rgba(255,251,242,.99)!important;
+  }
+  html body > nav.jumpbar::before,
+  html body > nav.jumpbar::after,
+  html body > nav.jumpbar > .wrap::before,
+  html body > nav.jumpbar > .wrap::after {
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+</style>
+<script id="measure-brand-header-for-taskbar">
+(() => {
+  const sync = () => {
+    const header = document.querySelector('body > header.header');
+    const bar = document.querySelector('body > nav.jumpbar');
+    if (!header || !bar) return;
+    const height = Math.ceil(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--brand-header-height', height + 'px');
+    document.body.style.paddingTop = (height + Math.ceil(bar.getBoundingClientRect().height)) + 'px';
+  };
+  sync();
+  window.addEventListener('load', sync, {once:true});
+  window.addEventListener('resize', sync, {passive:true});
+  window.addEventListener('orientationchange', sync, {passive:true});
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(sync);
+    const header = document.querySelector('body > header.header');
+    const bar = document.querySelector('body > nav.jumpbar');
+    if (header) observer.observe(header);
+    if (bar) observer.observe(bar);
+  }
+})();
+</script>
+
 </body>
 </html>
 
