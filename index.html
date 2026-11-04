@@ -1230,3 +1230,38 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
   }
 </style>
+
+
+<style id="domestic-card-content-left-aligned">
+  /* Keep the cards centred as a group, while restoring left alignment inside each card. */
+  #domestic .domestic-grid > .domestic-card .domestic-copy,
+  #domestic .domestic-grid > .domestic-card .domestic-copy .place,
+  #domestic .domestic-grid > .domestic-card .domestic-copy h3,
+  #domestic .domestic-grid > .domestic-card .domestic-copy p,
+  #domestic .domestic-grid > .domestic-card .itinerary,
+  #domestic .domestic-grid > .domestic-card .itinerary summary,
+  #domestic .domestic-grid > .domestic-card .itinerary ol,
+  #domestic .domestic-grid > .domestic-card .itinerary li {
+    text-align:left!important;
+  }
+  #domestic .domestic-grid > .domestic-card .domestic-meta {
+    justify-content:space-between!important;
+    text-align:left!important;
+  }
+  #domestic .domestic-grid > .domestic-card .itinerary summary {
+    justify-content:space-between!important;
+  }
+  #domestic .domestic-grid > .domestic-card .itinerary ol {
+    list-style:none!important;
+    padding:4px 0 0!important;
+  }
+  #domestic .domestic-grid > .domestic-card .itinerary li {
+    display:grid!important;
+    grid-template-columns:48px 1fr!important;
+    gap:9px!important;
+  }
+  #domestic .domestic-grid > .domestic-card .itinerary li b {
+    display:inline!important;
+    margin:0!important;
+  }
+</style>
