@@ -696,6 +696,20 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   @media(prefers-reduced-transparency:reduce){
     #journeys > .wrap { background:#fff!important; -webkit-backdrop-filter:none; backdrop-filter:none; }
   }
+
+<style id="international-tours-main-heading-spacing">
+  /* Improve tracking on the main International Tours section title. */
+  #journeys .section-head h2{
+    letter-spacing:.055em!important;
+    word-spacing:.08em!important;
+  }
+  @media(max-width:620px){
+    #journeys .section-head h2{
+      letter-spacing:.04em!important;
+      word-spacing:.04em!important;
+    }
+  }
+</style>
 </style>
 </head>
 <body>
