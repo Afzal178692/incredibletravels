@@ -963,3 +963,20 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   }
   body > header.header { z-index:100!important; }
 </style>
+
+
+<style id="remove-header-taskbar-borderline">
+  /* Remove the visible divider between the fixed brand header and quick-link taskbar. */
+  body > header.header,
+  body > nav.jumpbar {
+    border:0!important;
+    border-bottom:0!important;
+    border-top:0!important;
+    box-shadow:none!important;
+    outline:0!important;
+  }
+  body > nav.jumpbar > .wrap,
+  body > nav.jumpbar > .wrap > a {
+    border-top:0!important;
+  }
+</style>
