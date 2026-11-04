@@ -370,13 +370,25 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     @media(max-width:620px){.domestic .domestic-copy h3{font-size:clamp(16px,4.8vw,23px)!important;line-height:1.2!important}}
   
 
+    /* Stronger letter spacing for clear International Tours category labels. */
+    #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+      letter-spacing:.075em!important;
+      font-size:29px!important;
+      line-height:1.2!important;
+    }
+    @media(max-width:620px){
+      #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+        letter-spacing:.06em!important;
+        font-size:27px!important;
+      }
+    }
     html.installed-app-mode #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
-      letter-spacing:.035em!important;
+      letter-spacing:.06em!important;
       font-size:27px!important;
     }
     @media(display-mode:standalone){
       #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
-        letter-spacing:.035em!important;
+        letter-spacing:.06em!important;
         font-size:27px!important;
       }
     }
