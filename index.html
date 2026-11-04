@@ -1009,6 +1009,22 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 })();
 </script>
 
+
+<style id="improve-diwali-video-clarity">
+  /* Show the full-detail 4K background video more clearly instead of washing it out. */
+  html body #travel-video-bg {
+    opacity:.92!important;
+    filter:none!important;
+    image-rendering:auto!important;
+  }
+  @media(max-width:850px) {
+    html body #travel-video-bg { opacity:.82!important; }
+  }
+  html body:before {
+    background:linear-gradient(180deg,rgba(35,17,8,.035),rgba(35,17,8,.08))!important;
+  }
+</style>
+
 </body>
 </html>
 
