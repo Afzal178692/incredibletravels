@@ -76,7 +76,7 @@ html{background:#102a32}
 body{background:transparent;position:relative;isolation:isolate}
 #travel-video-bg{position:fixed;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%);z-index:0;pointer-events:none;border:0;background:#102a32;object-fit:cover;opacity:.82}
     body>header,body>nav,body>main,body>footer{position:relative;z-index:1}
-    @media(max-width:768px){#travel-video-bg{width:177.78vh;height:100vh;min-width:177.78vh;min-height:100vh;opacity:.72}}
+    @media(max-width:768px){#travel-video-bg{width:100vw;height:100vh;min-width:100vw;min-height:100vh;opacity:.72;object-fit:cover}}
 body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(135deg,rgba(8,25,32,.24),rgba(8,25,32,.12) 48%,rgba(8,25,32,.22))}
 .header,.jumpbar{background:rgba(255,255,255,.72)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .story,.domestic,.membership-section,.request-section,.newsletter{background:transparent!important}
@@ -554,7 +554,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 <style id="mobile-performance-optimisation">
   /* Keep the desktop cinematic background, but avoid decoding a 4K/60fps video on phones. */
-  @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  @media (max-width: 768px) and (display-mode: standalone), (prefers-reduced-motion: reduce) {
     #travel-video-bg { display:none!important; }
     body { background:linear-gradient(145deg,#fff7e8 0%,#fff9f1 48%,#f7f3ff 100%)!important; }
     body:before { background:radial-gradient(ellipse at 8% 8%,rgba(255,177,112,.15),transparent 42%),radial-gradient(ellipse at 92% 18%,rgba(255,218,145,.18),transparent 42%),linear-gradient(145deg,#fff7e8 0%,#fff9f1 48%,#f7f3ff 100%)!important; }
@@ -575,11 +575,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   (() => {
     const video = document.getElementById('travel-video-bg');
     if (!video) return;
-    const mobileOrLowPower =
-      window.matchMedia('(max-width: 768px)').matches ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      Boolean(navigator.connection && navigator.connection.saveData);
-    if (mobileOrLowPower) {
+    const installedAppOrReducedMotion =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (installedAppOrReducedMotion) {
       video.pause();
       video.remove();
       return;
