@@ -1,4 +1,4 @@
-const CACHE_NAME = "incredible-travels-v51";
+const CACHE_NAME = "incredible-travels-v52";
 const APP_SHELL = [
   new URL("./", self.location).href,
   new URL("./index.html", self.location).href,
@@ -32,18 +32,17 @@ self.addEventListener("fetch", event => {
 
   if (request.mode === "navigate") {
     event.respondWith((async () => {
-      try {
-        const response = await fetch(new Request(request, { cache: "no-store" }));
+      const cached = (await caches.match(request)) ||
+        (await caches.match(new URL("./index.html", self.registration.scope).href));
+      const refresh = fetch(new Request(request, { cache: "no-store" })).then(async response => {
         if (response.ok) {
           const cache = await caches.open(CACHE_NAME);
           await cache.put(request, response.clone());
         }
         return response;
-      } catch {
-        return (await caches.match(request)) ||
-          (await caches.match(new URL("./index.html", self.registration.scope).href)) ||
-          Response.error();
-      }
+      }).catch(() => null);
+      // Show the cached page immediately; refresh it quietly for the next visit.
+      return cached || await refresh || Response.error();
     })());
     return;
   }
