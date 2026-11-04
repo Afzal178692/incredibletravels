@@ -951,6 +951,19 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
   }
 </style>
+
+<style id="desktop-taskbar-tab-spacing">
+  /* Add breathing room between desktop quick-link tabs without changing mobile. */
+  @media (min-width:851px) {
+    html body nav.jumpbar > .wrap {
+      column-gap:14px!important;
+    }
+    html body nav.jumpbar > .wrap > a {
+      padding-left:20px!important;
+      padding-right:20px!important;
+    }
+  }
+</style>
 </body>
 </html>
 
