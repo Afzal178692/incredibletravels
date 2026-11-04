@@ -926,7 +926,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 <style id="diwali-rangoli-diya-photo-background">
   /* Static Diwali rangoli-and-diya photo replaces the background video on browsers. */
-  html, body { background:#28160f!important; }
+  html, body { background:#f8e9c9!important; }
   body:before {
     content:"";
     position:fixed;
@@ -934,9 +934,10 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     z-index:-1;
     pointer-events:none;
     background:
-      linear-gradient(180deg,rgba(24,12,8,.22),rgba(24,12,8,.10) 48%,rgba(24,12,8,.24)),
+      linear-gradient(180deg,rgba(255,245,220,.04),rgba(255,245,220,.02) 48%,rgba(255,245,220,.06)),
       url('https://images.pexels.com/photos/36778018/pexels-photo-36778018.jpeg?cs=srgb&dl=pexels-kunwar-singh-2228062-36778018.jpg&fm=jpg')
       center center / cover no-repeat!important;
+    filter:brightness(1.22) saturate(1.18);
   }
   #travel-video-bg { display:none!important; }
 </style>
