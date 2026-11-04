@@ -901,9 +901,13 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </script>
 
 
-<style id="diwali-video-browser-visibility-fix">
-  /* Keep the Diwali background video visible on the website in desktop and mobile browsers. */
-  html body #travel-video-bg {
+<video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+  <source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4">
+</video>
+<style id="diwali-continuous-video-background">
+  /* Continuous Diwali-themed video background for desktop and mobile browsers. */
+  html, body { background:#24150d!important; }
+  body #travel-video-bg {
     display:block!important;
     visibility:visible!important;
     position:fixed!important;
@@ -915,31 +919,21 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     object-fit:cover!important;
     pointer-events:none!important;
     z-index:0!important;
-    opacity:.62!important;
+    opacity:.48!important;
   }
   @media(max-width:850px) {
-    html body #travel-video-bg { opacity:.30!important; }
+    body #travel-video-bg { opacity:.34!important; }
   }
-  html.installed-app-mode #travel-video-bg { display:none!important; }
-</style>
-
-
-<style id="diwali-rangoli-diya-photo-background">
-  /* Static Diwali rangoli-and-diya photo replaces the background video on browsers. */
-  html, body { background:#f8e9c9!important; }
+  html.installed-app-mode body #travel-video-bg { display:none!important; }
   body:before {
     content:"";
     position:fixed;
     inset:0;
-    z-index:-1;
+    z-index:0;
     pointer-events:none;
-    background:
-      linear-gradient(180deg,rgba(255,245,220,.04),rgba(255,245,220,.02) 48%,rgba(255,245,220,.06)),
-      url('https://images.pexels.com/photos/36778018/pexels-photo-36778018.jpeg?cs=srgb&dl=pexels-kunwar-singh-2228062-36778018.jpg&fm=jpg')
-      center center / cover no-repeat!important;
-    filter:brightness(1.22) saturate(1.18);
+    background:linear-gradient(180deg,rgba(35,17,8,.10),rgba(35,17,8,.20));
   }
-  #travel-video-bg { display:none!important; }
+  body > :not(#travel-video-bg) { position:relative; z-index:1; }
 </style>
 
 </body>
