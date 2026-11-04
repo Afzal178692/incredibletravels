@@ -1,2 +1,2 @@
-# incredibletravels.com
+# incredibletravels
 Travel Website
