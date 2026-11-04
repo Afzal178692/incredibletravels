@@ -1324,3 +1324,43 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     flex-shrink:0!important;
   }
 </style>
+
+
+<style id="international-card-layout-centered">
+  /* Center International Tours cards as a group; keep all card content left-aligned. */
+  #journeys .domestic-grid {
+    display:flex!important;
+    flex-wrap:wrap!important;
+    justify-content:center!important;
+    align-items:stretch!important;
+    gap:17px!important;
+  }
+  #journeys .domestic-grid > article.domestic-card {
+    flex:0 1 calc((100% - 34px)/3)!important;
+    min-width:0!important;
+  }
+  #journeys .domestic-grid > article.domestic-card .domestic-copy,
+  #journeys .domestic-grid > article.domestic-card .domestic-copy .place,
+  #journeys .domestic-grid > article.domestic-card .domestic-copy h3,
+  #journeys .domestic-grid > article.domestic-card .domestic-copy p,
+  #journeys .domestic-grid > article.domestic-card .itinerary,
+  #journeys .domestic-grid > article.domestic-card .itinerary summary,
+  #journeys .domestic-grid > article.domestic-card .itinerary ol,
+  #journeys .domestic-grid > article.domestic-card .itinerary li {
+    text-align:left!important;
+  }
+  #journeys .domestic-grid > article.domestic-card .domestic-meta {
+    justify-content:space-between!important;
+    text-align:left!important;
+  }
+  @media(max-width:850px) {
+    #journeys .domestic-grid > article.domestic-card {
+      flex-basis:calc((100% - 17px)/2)!important;
+    }
+  }
+  @media(max-width:620px) {
+    #journeys .domestic-grid > article.domestic-card {
+      flex-basis:100%!important;
+    }
+  }
+</style>
