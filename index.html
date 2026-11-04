@@ -606,37 +606,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
   }
 </style>
-<script id="mobile-video-gate">
-  (() => {
-    const video = document.getElementById('travel-video-bg');
-    if (!video) return;
-    const isInstalledApp =
-      window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true;
-    if (isInstalledApp) document.documentElement.classList.add('installed-app-mode');
-    // Keep the Diwali video playing in normal desktop and mobile browsers.
-    // The retired standalone app remains excluded.
-    if (isInstalledApp) {
-      video.pause();
-      video.remove();
-      return;
-    }
-    const source = document.createElement('source');
-    source.src = 'https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4';
-    source.type = 'video/mp4';
-    video.appendChild(source);
-    video.preload = 'auto';
-    video.load();
-    const startPlayback = () => video.play().catch(() => {});
-    startPlayback();
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') startPlayback();
-      else video.pause();
-    });
-  })();
-</script>
-
-
 <style id="diwali-right-diya-direction">
   /* Turn the right-hand diya inward so its flame faces the Diwali greeting. */
   .diwali-banner .diya-right {
@@ -745,7 +714,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </script>
 </head>
 <body>
-<video id="travel-video-bg" autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
 <div class="diwali-banner" role="note" aria-label="Happy Diwali"><span class="diya" aria-hidden="true">🪔</span><span class="diwali-title">Happy Diwali</span><span class="diya diya-right" aria-hidden="true">🪔</span></div>
 <header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span><span class="brand-name">INCREDIBLE<br class="mobile-brand-break"> TRAVELS</span><span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#journeys">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
@@ -953,6 +921,24 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     html body #travel-video-bg { opacity:.30!important; }
   }
   html.installed-app-mode #travel-video-bg { display:none!important; }
+</style>
+
+
+<style id="diwali-rangoli-diya-photo-background">
+  /* Static Diwali rangoli-and-diya photo replaces the background video on browsers. */
+  html, body { background:#28160f!important; }
+  body:before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(24,12,8,.22),rgba(24,12,8,.10) 48%,rgba(24,12,8,.24)),
+      url('https://images.pexels.com/photos/36778018/pexels-photo-36778018.jpeg?cs=srgb&dl=pexels-kunwar-singh-2228062-36778018.jpg&fm=jpg')
+      center center / cover no-repeat!important;
+  }
+  #travel-video-bg { display:none!important; }
 </style>
 
 </body>
