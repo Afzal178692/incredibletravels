@@ -575,9 +575,12 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   (() => {
     const video = document.getElementById('travel-video-bg');
     if (!video) return;
-    const installedAppOrReducedMotion =
+    const isInstalledApp =
       window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true ||
+      window.navigator.standalone === true;
+    if (isInstalledApp) document.documentElement.classList.add('installed-app-mode');
+    const installedAppOrReducedMotion =
+      isInstalledApp ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (installedAppOrReducedMotion) {
       video.pause();
@@ -603,6 +606,33 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   @media(prefers-reduced-motion:reduce) {
     .diwali-banner .diya-right { animation:none!important; }
   }
+</style>
+
+<style id="installed-app-diya-photo-background">
+  /* Static Diwali diya photograph is limited to the installed mobile app. */
+  @media (display-mode: standalone) and (max-width: 850px) {
+    html, html body { background:#24130e!important; }
+    body { background:transparent!important; }
+    body:before {
+      z-index:-1!important;
+      opacity:1!important;
+      background:
+        linear-gradient(180deg,rgba(24,12,8,.43),rgba(24,12,8,.25) 45%,rgba(24,12,8,.48)),
+        url('https://c.pxhere.com/photos/2e/78/lamp_earthen_oil_lamp_flame_light_festival_diwali_festive-1022268.jpg!d')
+        center center / cover no-repeat!important;
+    }
+    #travel-video-bg { display:none!important; }
+  }
+  html.installed-app-mode body { background:transparent!important; }
+  html.installed-app-mode body:before {
+    z-index:-1!important;
+    opacity:1!important;
+    background:
+      linear-gradient(180deg,rgba(24,12,8,.43),rgba(24,12,8,.25) 45%,rgba(24,12,8,.48)),
+      url('https://c.pxhere.com/photos/2e/78/lamp_earthen_oil_lamp_flame_light_festival_diwali_festive-1022268.jpg!d')
+      center center / cover no-repeat!important;
+  }
+  html.installed-app-mode #travel-video-bg { display:none!important; }
 </style>
 
 </head>
