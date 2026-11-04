@@ -281,13 +281,13 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   body{background:transparent!important}
 }
 .diwali-banner{min-height:42px;display:flex;align-items:center;justify-content:center;gap:17px;padding:7px 14px;background:linear-gradient(105deg,#4b1018,#7b2024 48%,#4b1018);color:#ffe8a8;border-bottom:1px solid #d6a84d;box-shadow:0 3px 12px #3b101522;text-align:center}.diwali-banner .diwali-title{font:600 clamp(18px,2.5vw,24px)/1.1 var(--serif);letter-spacing:.045em;text-shadow:0 1px 9px #f6c75b55}.diwali-banner .diya{font-size:21px;line-height:1;filter:drop-shadow(0 0 5px #ffc65a);animation:diya-glow 2.4s ease-in-out infinite alternate}.diwali-banner .diya{display:inline-block}.diwali-banner .diya:last-child{animation:diya-glow-inward 2.4s ease-in-out infinite alternate}@keyframes diya-glow-inward{from{transform:translateY(0) scaleX(-1) scale(1);filter:drop-shadow(0 0 3px #ffc65a)}to{transform:translateY(-1px) scaleX(-1) scale(1.09);filter:drop-shadow(0 0 9px #ffc65a)}}@keyframes diya-glow{from{transform:translateY(0) scale(1);filter:drop-shadow(0 0 3px #ffc65a)}to{transform:translateY(-1px) scale(1.09);filter:drop-shadow(0 0 9px #ffc65a)}}@media(max-width:620px){.diwali-banner{min-height:38px;gap:12px;padding:6px 10px}.diwali-banner .diya{font-size:18px}.diwali-banner .diwali-title{font-size:19px}}@media(prefers-reduced-motion:reduce){.diwali-banner .diya{animation:none}}
-/* Keep the Diwali greeting visible above the sticky site navigation while scrolling */
-.diwali-banner{position:sticky;top:0;z-index:20}
-.header{top:42px}
+/* Keep the greeting attached to the sticky site header. */
+.diwali-banner{position:relative;top:auto;z-index:auto}
+.header{top:0}
 .jumpbar{top:116px}
 @media(max-width:620px){
   .diwali-banner{min-height:38px}
-  .header{top:38px}
+  .header{top:0}
   .jumpbar{top:104px!important}
 }
 
