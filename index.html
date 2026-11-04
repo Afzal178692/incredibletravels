@@ -1327,16 +1327,16 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 
 <style id="international-card-layout-centered">
-  /* Center International Tours cards as a group; keep all card content left-aligned. */
+  /* Use more compact International Tours cards, centered as a group; keep content left-aligned. */
   #journeys .domestic-grid {
     display:flex!important;
     flex-wrap:wrap!important;
     justify-content:center!important;
     align-items:stretch!important;
-    gap:17px!important;
+    gap:14px!important;
   }
   #journeys .domestic-grid > article.domestic-card {
-    flex:0 1 calc((100% - 34px)/3)!important;
+    flex:0 1 calc((100% - 42px)/4)!important;
     min-width:0!important;
   }
   #journeys .domestic-grid > article.domestic-card .domestic-copy,
@@ -1353,14 +1353,20 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     justify-content:space-between!important;
     text-align:left!important;
   }
-  @media(max-width:850px) {
+  @media(max-width:1050px) {
     #journeys .domestic-grid > article.domestic-card {
-      flex-basis:calc((100% - 17px)/2)!important;
+      flex-basis:calc((100% - 28px)/3)!important;
     }
   }
-  @media(max-width:620px) {
+  @media(max-width:760px) {
+    #journeys .domestic-grid > article.domestic-card {
+      flex-basis:calc((100% - 14px)/2)!important;
+    }
+  }
+  @media(max-width:480px) {
     #journeys .domestic-grid > article.domestic-card {
       flex-basis:100%!important;
+      max-width:420px!important;
     }
   }
 </style>
