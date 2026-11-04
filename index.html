@@ -980,3 +980,17 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     border-top:0!important;
   }
 </style>
+
+
+<style id="remove-taskbar-top-border-final">
+  body > nav.jumpbar,
+  body > nav.jumpbar::before,
+  body > nav.jumpbar::after,
+  body > nav.jumpbar > .wrap,
+  body > nav.jumpbar > .wrap::before,
+  body > nav.jumpbar > .wrap::after {
+    border-top: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+</style>
