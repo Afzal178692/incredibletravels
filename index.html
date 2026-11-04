@@ -1204,3 +1204,29 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 
 
+
+
+<style id="domestic-card-layout-centered">
+  /* Center the Domestic Tours cards as a group; preserve all text alignment. */
+  #domestic .domestic-grid {
+    display:flex!important;
+    flex-wrap:wrap!important;
+    justify-content:center!important;
+    align-items:stretch!important;
+    gap:17px!important;
+  }
+  #domestic .domestic-grid > .domestic-card {
+    flex:0 1 calc((100% - 34px)/3)!important;
+    min-width:0!important;
+  }
+  @media(max-width:850px) {
+    #domestic .domestic-grid > .domestic-card {
+      flex-basis:calc((100% - 17px)/2)!important;
+    }
+  }
+  @media(max-width:620px) {
+    #domestic .domestic-grid > .domestic-card {
+      flex-basis:100%!important;
+    }
+  }
+</style>
