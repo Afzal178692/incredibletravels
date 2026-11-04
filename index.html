@@ -349,7 +349,20 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       nav.jumpbar a{font-size:13px!important;line-height:1.15!important}
     }
 
-</style>
+
+    /* Make International tour category titles easier to read. */
+    #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+      font-size:29px!important;
+      line-height:1.15!important;
+      font-weight:600!important;
+    }
+    @media(max-width:620px){
+      #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+        font-size:27px!important;
+      }
+    }
+
+  </style>
 
 <style id="taskbar-font-size-final">
   /* Final taskbar type scale: smaller labels, unchanged 32px bar. */
