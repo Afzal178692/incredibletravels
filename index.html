@@ -838,6 +838,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     const bar = document.querySelector('nav.jumpbar');
     if (!bar) return;
     const headerHeight = header && getComputedStyle(header).display !== 'none' ? header.getBoundingClientRect().height : 0;
+    if (header) document.body.style.paddingTop = Math.ceil(headerHeight) + 'px';
     bar.style.setProperty('--jumpbar-sticky-top', Math.ceil(headerHeight) + 'px');
   };
   updateTaskbarOffset();
@@ -932,6 +933,17 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     background:linear-gradient(180deg,rgba(35,17,8,.10),rgba(35,17,8,.20));
   }
   body > :not(#travel-video-bg) { position:relative; z-index:1; }
+</style>
+<style id="fixed-diwali-brand-header">
+  /* Keep the Happy Diwali banner and Incredible Travels brand header fixed at the top while scrolling. */
+  body > header.header {
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:100!important;
+  }
 </style>
 
 </body>
