@@ -717,6 +717,23 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       });
     })();
 
+    // Keep same-page section navigation out of Android Back history in the installed app.
+    (() => {
+      document.addEventListener('click', event => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link || event.defaultPrevented || event.button !== 0 ||
+            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const hash = link.getAttribute('href');
+        if (!hash || hash === '#') return;
+        let target;
+        try { target = document.querySelector(hash); } catch { return; }
+        if (!target) return;
+        event.preventDefault();
+        history.replaceState(history.state, '', hash);
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    })();
+
     // Register the offline-capable service worker.
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
