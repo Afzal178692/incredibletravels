@@ -554,7 +554,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 <style id="mobile-performance-optimisation">
   /* Keep the desktop cinematic background, but avoid decoding a 4K/60fps video on phones. */
-  @media (max-width: 768px) and (display-mode: standalone), (prefers-reduced-motion: reduce) {
+  @media (max-width: 768px), (prefers-reduced-motion: reduce) {
     #travel-video-bg { display:none!important; }
     body { background:linear-gradient(145deg,#fff7e8 0%,#fff9f1 48%,#f7f3ff 100%)!important; }
     body:before { background:radial-gradient(ellipse at 8% 8%,rgba(255,177,112,.15),transparent 42%),radial-gradient(ellipse at 92% 18%,rgba(255,218,145,.18),transparent 42%),linear-gradient(145deg,#fff7e8 0%,#fff9f1 48%,#f7f3ff 100%)!important; }
@@ -570,6 +570,15 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .quote { background:rgba(50,27,61,.97)!important; }
     .diwali-banner .diya { animation:none!important; filter:none!important; }
   }
+  @media (max-width: 768px) {
+    /* Serve smaller, faster background images on phones while retaining desktop artwork. */
+    .hero-card {
+      background-image:url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=65')!important;
+    }
+    .story-photo {
+      background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=65')!important;
+    }
+  }
 </style>
 <script id="mobile-video-gate">
   (() => {
@@ -579,8 +588,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
     if (isInstalledApp) document.documentElement.classList.add('installed-app-mode');
+    const isMobileBrowser = window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
     const installedAppOrReducedMotion =
       isInstalledApp ||
+      isMobileBrowser ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (installedAppOrReducedMotion) {
       video.pause();
