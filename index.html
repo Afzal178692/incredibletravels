@@ -911,6 +911,28 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
   }
 </style>
+
+<style id="taskbar-tabs-transparent-after-scroll">
+  /* Hide tab fill colours after scrolling while preserving tab text and dimensions. */
+  html.taskbar-scrolled body nav.jumpbar > .wrap > a,
+  html.taskbar-scrolled body nav.jumpbar > .wrap > a.is-active,
+  html.taskbar-scrolled body nav.jumpbar > .wrap > a:hover,
+  html.taskbar-scrolled body nav.jumpbar > .wrap > a:focus {
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+</style>
+<script id="taskbar-scroll-background-toggle">
+  (() => {
+    const update = () => {
+      document.documentElement.classList.toggle('taskbar-scrolled', window.scrollY > 20);
+    };
+    update();
+    window.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('pageshow', update);
+  })();
+</script>
+
 </body>
 </html>
 
