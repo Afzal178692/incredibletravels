@@ -675,7 +675,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       if (!membershipLink || !membershipSection) return;
       membershipLink.addEventListener('click', event => {
         event.preventDefault();
-        history.replaceState(null, '', '#membership');
         // Keep the complete selected quick-link visible inside the horizontally scrollable task bar.
         const taskBarViewport = membershipLink.closest('.jumpbar')?.querySelector('.wrap');
         if (taskBarViewport) {
@@ -700,7 +699,6 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       if (!internationalLink || !internationalSection) return;
       internationalLink.addEventListener('click', event => {
         event.preventDefault();
-        history.replaceState(null, '', '#journeys');
         const taskBarViewport = internationalLink.closest('.jumpbar')?.querySelector('.wrap');
         if (taskBarViewport) {
           const linkLeft = internationalLink.getBoundingClientRect().left -
@@ -729,7 +727,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
         try { target = document.querySelector(hash); } catch { return; }
         if (!target) return;
         event.preventDefault();
-        history.replaceState(history.state, '', hash);
+        // Do not change the URL or browser history for in-page section navigation.
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     })();
