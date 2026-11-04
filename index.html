@@ -369,6 +369,17 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     .domestic .domestic-copy h3{font-size:27px!important;line-height:1.15!important}
     @media(max-width:620px){.domestic .domestic-copy h3{font-size:clamp(16px,4.8vw,23px)!important;line-height:1.2!important}}
   
+
+    html.installed-app-mode #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+      letter-spacing:.035em!important;
+      font-size:27px!important;
+    }
+    @media(display-mode:standalone){
+      #journeys .domestic-grid > .domestic-card .domestic-copy > h3{
+        letter-spacing:.035em!important;
+        font-size:27px!important;
+      }
+    }
 </style>
 
 <style id="taskbar-font-size-final">
