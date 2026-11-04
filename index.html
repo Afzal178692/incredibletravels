@@ -900,9 +900,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </script>
 
 
-<video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-  <source src="https://videos.pexels.com/video-files/36424458/15444557_3840_2160_60fps.mp4" type="video/mp4">
-</video>
+<div id="travel-photo-bg" aria-hidden="true"></div>
 <style id="diwali-continuous-video-background">
   /* Continuous Diwali-themed video background for desktop and mobile browsers. */
   html, body { background:#24150d!important; }
@@ -1022,6 +1020,39 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   }
   html body:before {
     background:linear-gradient(180deg,rgba(35,17,8,.035),rgba(35,17,8,.08))!important;
+  }
+</style>
+
+
+<style id="full-page-diwali-photo-background">
+  /* Static high-resolution Diwali photograph across the full website background. */
+  html, body { background:#24150d!important; }
+  body #travel-photo-bg {
+    display:block!important;
+    visibility:visible!important;
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100vh!important;
+    pointer-events:none!important;
+    z-index:0!important;
+    background-image:url("https://images.pexels.com/photos/34400039/pexels-photo-34400039.jpeg?cs=srgb&dl=pexels-anshu-34400039.jpg&fm=jpg");
+    background-position:center center!important;
+    background-repeat:no-repeat!important;
+    background-size:cover!important;
+  }
+  html.installed-app-mode body #travel-photo-bg { display:none!important; }
+  body:before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,rgba(20,10,30,.08),rgba(35,17,8,.16));
+  }
+  body > :not(#travel-photo-bg) { position:relative; z-index:1; }
+  @media(max-width:850px) {
+    body #travel-photo-bg { background-position:center center!important; }
   }
 </style>
 
