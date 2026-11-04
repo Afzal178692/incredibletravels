@@ -714,8 +714,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </script>
 </head>
 <body>
-<div class="diwali-banner" role="note" aria-label="Happy Diwali"><span class="diya" aria-hidden="true">🪔</span><span class="diwali-title">Happy Diwali</span><span class="diya diya-right" aria-hidden="true">🪔</span></div>
-<header class="header"><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span><span class="brand-name">INCREDIBLE<br class="mobile-brand-break"> TRAVELS</span><span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#journeys">Find your trip ↗</a></div></div></header>
+<header class="header"><div class="diwali-banner" role="note" aria-label="Happy Diwali"><span class="diya" aria-hidden="true">🪔</span><span class="diwali-title">Happy Diwali</span><span class="diya diya-right" aria-hidden="true">🪔</span></div><div class="wrap nav"><a class="brand" href="#home"><span class="brand-icon">✳</span><span class="brand-name">INCREDIBLE<br class="mobile-brand-break"> TRAVELS</span><span class="brand-tagline">Your one-stop shop for Vacations, Air Tickets, Visa, <span class="tagline-last">Travel Insurance and more!</span></span></a><div class="actions"><a href="#contact">Talk to a trip designer</a><a class="btn coral" href="#journeys">Find your trip ↗</a></div></div></header>
   <nav class="jumpbar" aria-label="Quick links"><div class="wrap"><a href="#journeys">International tours</a><a href="#domestic">Domestic tours</a><a href="#contact">Service requests</a><a href="#membership">Incredible Membership offers</a></div></nav>
   <main id="home">
     <div class="hero"><div class="wrap"><div class="hero-card"><div class="hero-copy"><div class="eyebrow">Big-hearted trips for curious people</div><h1>Go feel<br><em>something.</em></h1><p>Take the long lunch. Miss the turn. Find the little café you’ll tell everyone about. This is travel made for being there.</p><div class="hero-actions"><a class="btn coral" href="#journeys">Explore the world ↗</a><a class="play-link" href="#story"><span class="play">▶</span> Get to know us</a></div></div></div></div></div>
@@ -777,7 +776,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
           const centeredLeft = linkLeft - (taskBarViewport.clientWidth - membershipLink.offsetWidth) / 2;
           taskBarViewport.scrollTo({ left: Math.max(0, centeredLeft), behavior: 'smooth' });
         }
-        const stickyHeight = ['.diwali-banner', '.header', '.jumpbar']
+        const stickyHeight = ['.header', '.jumpbar']
           .map(selector => document.querySelector(selector))
           .filter(element => element && getComputedStyle(element).display !== 'none')
           .reduce((total, element) => total + element.getBoundingClientRect().height, 0);
@@ -838,9 +837,8 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     const header = document.querySelector('.header');
     const bar = document.querySelector('nav.jumpbar');
     if (!bar) return;
-    const bannerHeight = banner && getComputedStyle(banner).display !== 'none' ? banner.getBoundingClientRect().height : 0;
     const headerHeight = header && getComputedStyle(header).display !== 'none' ? header.getBoundingClientRect().height : 0;
-    bar.style.setProperty('--jumpbar-sticky-top', Math.ceil(bannerHeight + headerHeight) + 'px');
+    bar.style.setProperty('--jumpbar-sticky-top', Math.ceil(headerHeight) + 'px');
   };
   updateTaskbarOffset();
   window.addEventListener('load', updateTaskbarOffset, {once:true});
@@ -902,7 +900,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 
 
 <video id="travel-video-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-  <source src="https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4" type="video/mp4">
+  <source src="https://videos.pexels.com/video-files/34865386/14775469_3840_2160_60fps.mp4" type="video/mp4">
 </video>
 <style id="diwali-continuous-video-background">
   /* Continuous Diwali-themed video background for desktop and mobile browsers. */
