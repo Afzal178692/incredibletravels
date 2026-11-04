@@ -614,11 +614,8 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
     if (isInstalledApp) document.documentElement.classList.add('installed-app-mode');
-    const isMobileBrowser = window.matchMedia('(max-width: 768px)').matches ||
-      window.matchMedia('(pointer: coarse)').matches;
     const installedAppOrReducedMotion =
       isInstalledApp ||
-      isMobileBrowser ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (installedAppOrReducedMotion) {
       video.pause();
@@ -629,7 +626,14 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     source.src = 'https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4';
     source.type = 'video/mp4';
     video.appendChild(source);
+    video.preload = 'metadata';
     video.load();
+    const startPlayback = () => video.play().catch(() => {});
+    startPlayback();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') startPlayback();
+      else video.pause();
+    });
   })();
 </script>
 
