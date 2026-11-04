@@ -1056,6 +1056,27 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   }
 </style>
 
+
+<style id="domestic-tours-glass-background">
+  /* Match the Domestic Tours section container to the International Tours glass finish. */
+  #domestic > .wrap {
+    background:rgba(255,255,255,.70)!important;
+    background-image:none!important;
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.82);
+    border-radius:22px;
+    padding:clamp(18px,3vw,32px)!important;
+    box-shadow:0 14px 38px rgba(36,54,84,.10);
+  }
+  @media(max-width:620px){
+    #domestic > .wrap { border-radius:18px; padding:18px 14px!important; }
+  }
+  @media(prefers-reduced-transparency:reduce){
+    #domestic > .wrap { background:#fff!important; -webkit-backdrop-filter:none; backdrop-filter:none; }
+  }
+</style>
+
 </body>
 </html>
 
