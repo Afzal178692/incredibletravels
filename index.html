@@ -614,10 +614,9 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
       window.matchMedia('(display-mode: standalone)').matches ||
       window.navigator.standalone === true;
     if (isInstalledApp) document.documentElement.classList.add('installed-app-mode');
-    const installedAppOrReducedMotion =
-      isInstalledApp ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (installedAppOrReducedMotion) {
+    // Keep the Diwali video playing in normal desktop and mobile browsers.
+    // The retired standalone app remains excluded.
+    if (isInstalledApp) {
       video.pause();
       video.remove();
       return;
@@ -626,7 +625,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     source.src = 'https://videos.pexels.com/video-files/34471414/14606350_3840_2160_60fps.mp4';
     source.type = 'video/mp4';
     video.appendChild(source);
-    video.preload = 'metadata';
+    video.preload = 'auto';
     video.load();
     const startPlayback = () => video.play().catch(() => {});
     startPlayback();
@@ -932,6 +931,29 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     window.addEventListener('pageshow', update);
   })();
 </script>
+
+
+<style id="diwali-video-browser-visibility-fix">
+  /* Keep the Diwali background video visible on the website in desktop and mobile browsers. */
+  html body #travel-video-bg {
+    display:block!important;
+    visibility:visible!important;
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100vh!important;
+    min-width:100vw!important;
+    min-height:100vh!important;
+    object-fit:cover!important;
+    pointer-events:none!important;
+    z-index:0!important;
+    opacity:.62!important;
+  }
+  @media(max-width:850px) {
+    html body #travel-video-bg { opacity:.30!important; }
+  }
+  html.installed-app-mode #travel-video-bg { display:none!important; }
+</style>
 
 </body>
 </html>
