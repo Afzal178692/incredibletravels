@@ -1366,3 +1366,17 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     }
   }
 </style>
+
+<style id="membership-taskbar-tab-no-background">
+  /* Keep the Incredible Membership offers tab transparent, including when selected. */
+  html body nav.jumpbar > .wrap > a[href="#membership"],
+  html body nav.jumpbar > .wrap > a[href="#membership"].is-active,
+  html body nav.jumpbar > .wrap > a[href="#membership"]:hover,
+  html body nav.jumpbar > .wrap > a[href="#membership"]:focus,
+  html body nav.jumpbar > .wrap > a[href="#membership"]:active {
+    background:transparent!important;
+    background-image:none!important;
+    box-shadow:none!important;
+    color:inherit!important;
+  }
+</style>
